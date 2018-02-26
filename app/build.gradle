@@ -9,7 +9,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 14
-        versionName "1.9.5"
+        versionName "1.9.5" // Girish test
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
