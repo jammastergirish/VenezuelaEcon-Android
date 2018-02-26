@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_first_layout"
+            android:title="@string/foreign_exchange" />
+        <item
+            android:id="@+id/bitcoin"
+            android:title="Bitcoin" />
+        <item
+            android:id="@+id/nav_second_layout"
+            android:title="@string/foreign_reserves" />
+        <!--<item-->
+            <!--android:id="@+id/inflation"-->
+            <!--android:title="@string/inflation" />-->
+        <item
+            android:id="@+id/m2"
+            android:title="@string/money_supply" />
+        <item
+            android:id="@+id/mw"
+            android:title="@string/minimum_wage" />
+        <item
+            android:id="@+id/oil"
+            android:title="@string/oil_prices" />
+        <item
+            android:id="@+id/crude_production"
+            android:title="@string/crude_production" />
+        <item
+            android:id="@+id/us_oil"
+            android:title="@string/us_oil" />
+
+
+        <item
+            android:id="@+id/about"
+            android:title="@string/about" />
+    </group>
+
+
+</menu>

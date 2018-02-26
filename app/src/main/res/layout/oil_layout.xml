@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Remember, WeightSum if want to specify number of units-->
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+
+            <TextView
+                android:text="WTI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/WTITextView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="12dp"
+                android:textColor="#ffe608"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/WTIVal"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="30dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/WTIMonth"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/WTIYear"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/WTI2Year"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+
+
+
+
+            <TextView
+                android:text="Brent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/BrentTextView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="21dp"
+                android:textSize="12dp"
+                android:textColor="#0015ff"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/BrentVal"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="30dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/BrentMonth"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/BrentYear"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Brent2Year"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+
+
+            <TextView
+                android:text="Venezuela"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/VenTextView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="12dp"
+                android:textColor="#1aff00"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/VenVal"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="30dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/VenMonth"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/VenYear"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Ven2Year"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+
+
+
+
+            <TextView
+                android:text="@string/OPEC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/OPECTextView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="21dp"
+                android:textSize="12dp"
+                android:textColor="#01ffe1"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/OPECVal"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="30dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/OPECMonth"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/OPECYear"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/OPEC2Year"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <com.shinobicontrols.charts.ChartView
+            android:id="@+id/Chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.shinobicontrols.charts.ChartView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

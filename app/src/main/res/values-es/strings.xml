@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">VenezuelaEcon</string>
+
+    <string name="in">en</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="officialtextview">DIPRO</string>
+    <string name="dicomtextview">DICOM</string>
+    <string name="blackmarkettextview">Tasa Paralela</string>
+    <string name="M2_Restextview">M2 / Reservas</string>
+
+    <string name="date">Fecha</string>
+    <string name="exchange_rate">Tasa de Cambio</string>
+
+    <string name="day">día</string>
+    <string name="month2">mes</string>
+    <string name="year2">año</string>
+
+    <string name="OPEC">OPEP</string>
+
+    <string name="yesterday">ayer</string>
+    <string name="week">una semana</string>
+    <string name="month">un mes</string>
+    <string name="year">un año</string>
+    <string name="years2">2 años</string>
+    <string name="years3">3 años</string>
+    <string name="years4">4 años</string>
+    <string name="years5">5 años</string>
+    <string name="years6">6 años</string>
+    <string name="years7">7 años</string>
+
+    <string name="foreign_exchange">Tasas de Cambio</string>
+    <string name="foreign_reserves">Reservas Internacionales</string>
+    <string name="inflation">Inflación</string>
+    <string name="money_supply">Liquidez Monetaria</string>
+    <string name="minimum_wage">Salario Minimo</string>
+    <string name="oil_prices">Precios del Petroleo</string>
+    <string name="crude_production">Producción de Crudo</string>
+    <string name="us_oil">Intercambio Petrolero con EE.UU.</string>
+
+    <string name="exports_to_venezuela">EE.UU. Exportaciones a Venezuela</string>
+    <string name="imports_from_venezuela">EE.UU. Importaciones desde Venezuela</string>
+
+    <string name="about">Información</string>
+    <string name="about_text">Esta aplicación fue creada por Girish Gupta, un periodista en Caracas. En tiempo real, datos de diversas fuentes se compilan en una base de datos en línea a partir del cual su dispositivo toma los datos.</string>
+    <string name="about2_text">Los datos están compilados e actualizados en vivo desde:\n\n- Banco Central de Venezuela\n- Ministerio de Petróleo y Minería\n- DolarToday\n-Administración de Información de Energía\n-Organización de Países Exportadores de Petróleo</string>
+    <string name="button">Enviar comentarios...</string>
+
+    <string name="barrel">barril</string>
+    <string name="barrels">barriles</string>
+    <string name="barrelsper">barriles por</string>
+
+    <string name="million">millones</string>
+    <string name="billion">mil millones</string>
+    <string name="trillion">billones</string>
+
+    <string name="directwithopec">Com. Directa con OPEP</string>
+    <string name="secondarysources">Fuentes Secundarias</string>
+</resources>

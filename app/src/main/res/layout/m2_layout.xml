@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Remember, WeightSum if want to specify number of units-->
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/M2Val"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="70dp"
+                android:paddingTop="30dp"
+                android:textSize="30dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/M2Month"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="70dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/M2Year"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="70dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/M22Year"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="70dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/M23Year"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="70dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/M24Year"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="70dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"></TextView>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <com.shinobicontrols.charts.ChartView
+            android:id="@+id/Chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.shinobicontrols.charts.ChartView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/shinobicontrols-android-charts-premium-java-1.9.0-3.aar/7f04fa62c15201ed8ccf373a4d943c20/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="e0de053435bb93b200c8ab7df0ed68c6895ebf91">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/46.jar" />
+    </item>
+
+</items>

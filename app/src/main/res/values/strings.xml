@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">VenezuelaEcon</string>
+
+    <string name="in">in</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="officialtextview">DIPRO</string>
+    <string name="dicomtextview">DICOM</string>
+    <string name="blackmarkettextview">Black Market</string>
+    <string name="M2_Restextview">M2 / Reserves</string>
+
+    <string name="date">Date</string>
+    <string name="exchange_rate">Exchange Rate</string>
+
+    <string name="day">day</string>
+    <string name="month2">month</string>
+    <string name="year2">year</string>
+
+    <string name="OPEC">OPEC</string>
+
+    <string name="yesterday">yesterday</string>
+    <string name="week">a week</string>
+    <string name="month">a month</string>
+    <string name="year">a year</string>
+    <string name="years2">2 years</string>
+    <string name="years3">3 years</string>
+    <string name="years4">4 years</string>
+    <string name="years5">5 years</string>
+    <string name="years6">6 years</string>
+    <string name="years7">7 years</string>
+
+    <string name="foreign_exchange">Exchange Rates</string>
+    <string name="foreign_reserves">Foreign Reserves</string>
+    <string name="inflation">Inflation</string>
+    <string name="money_supply">Money Supply</string>
+    <string name="minimum_wage">Minimum Wage</string>
+    <string name="oil_prices">Oil Prices</string>
+    <string name="crude_production">Crude Production</string>
+    <string name="us_oil">U.S. Oil</string>
+
+    <string name="exports_to_venezuela">U.S. Exports to Venezuela</string>
+    <string name="imports_from_venezuela">U.S. Imports from Venezuela</string>
+
+    <string name="about">About</string>
+    <string name="about_text">This app was created by Girish Gupta, a Caracas-based journalist. In real time, data from various sources is compiled into an online database from which your device pulls data. Notifications are fully automated and so very fast and accurate.</string>
+    <string name="about2_text">Data compiled and updated live from:\n\n- Central Bank of Venezuela\n- Venezuela\'s Ministry of Oil and Mining\n- DolarToday\n-U.S. Energy Information Administration\n-Organization of the Petroleum Exporting Countries</string>
+    <string name="button">Send comments...</string>
+
+    <string name="barrel">barrel</string>
+    <string name="barrels">barrels</string>
+    <string name="barrelsper">barrels per</string>
+
+    <string name="million">million</string>
+    <string name="billion">billion</string>
+    <string name="trillion">trillion</string>
+
+    <string name="directwithopec">Direct Comm. with OPEC</string>
+    <string name="secondarysources">Secondary Sources</string>
+</resources>

@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "722844387455",
+    "firebase_url": "https://venezuela-econ.firebaseio.com",
+    "project_id": "venezuela-econ",
+    "storage_bucket": "venezuela-econ.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722844387455:android:d49178d1110cf1fc",
+        "android_client_info": {
+          "package_name": "com.girish.venecon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722844387455-8eo9clilh5snnrnmqafqni88l6b9a69f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.girish.venecon",
+            "certificate_hash": "0c39d924f2f8cfe24d37ea51f5b29f3a7a851634"
+          }
+        },
+        {
+          "client_id": "722844387455-grpnb82qslpmno21rmipn8a5q7qooqq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcJjewCW-5SXWMiKJx3wcfwB6UU2ryR40"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722844387455-grpnb82qslpmno21rmipn8a5q7qooqq2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "722844387455-6q7kfih3hh815b2ht51dcp7pg7b7po5s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.girish.VenEcon"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
