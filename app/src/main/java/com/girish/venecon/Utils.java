@@ -1,5 +1,6 @@
 package com.girish.venecon;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.Html;
 import android.widget.TextView;
@@ -231,7 +232,7 @@ public class Utils {
     }
 
 
-
-
-
+    public static void handleError(Context context, String message) {
+        // TODO figure out how to display an error. I presume we're gonna need Context too, to display a Toast, or a Dialog, or anything really
+    }
 }
