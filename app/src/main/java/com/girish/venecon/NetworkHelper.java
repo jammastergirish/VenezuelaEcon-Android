@@ -3,7 +3,10 @@ package com.girish.venecon;
 import android.util.Log;
 
 import com.girish.venecon.api.ApiService;
+import com.girish.venecon.api.models.BitcoinData;
 import com.girish.venecon.api.models.ExchangeData;
+import com.girish.venecon.api.models.M2Data;
+import com.girish.venecon.api.models.ReserveData;
 import com.girish.venecon.utils.Constants;
 
 import java.io.IOException;
@@ -51,9 +54,34 @@ public class NetworkHelper {
     public void getExchangeDataRetrofit(final OnDataCallback<List<ExchangeData>> onDataCallback){
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<ExchangeData>> call = apiService.getExchangeData();
-        call.enqueue(new Callback<List<ExchangeData>>() {
+        processCall(call, onDataCallback);
+    }
+
+    public void getReservesDataRetrofit(final OnDataCallback<List<ReserveData>> onDataCallback){
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<ReserveData>> call = apiService.getReserveData();
+        processCall(call, onDataCallback);
+    }
+
+    public void getM2DataRetrofit(final OnDataCallback<List<M2Data>> onDataCallback){
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<M2Data>> call = apiService.getM2Data();
+        processCall(call, onDataCallback);
+    }
+
+    public void getBitcoinDataRetrofit(final OnDataCallback<List<BitcoinData>> onDataCallback){
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<BitcoinData>> call = apiService.getBitcoinData();
+        processCall(call, onDataCallback);
+    }
+
+    // Since all the calls are processed exactly the same way,
+    // We can extract it to a separate generic method like this
+    // I invented this right now, so I learned something new which is great :D
+    private <T> void processCall(Call<T> call, final OnDataCallback<T> onDataCallback) {
+        call.enqueue(new Callback<T>() {
             @Override
-            public void onResponse(Call<List<ExchangeData>> call, retrofit2.Response<List<ExchangeData>> response) {
+            public void onResponse(Call<T> call, retrofit2.Response<T> response) {
                 if(response.isSuccessful()){
                     onDataCallback.onSuccess(response.body());
                 } else {
@@ -62,7 +90,7 @@ public class NetworkHelper {
             }
 
             @Override
-            public void onFailure(Call<List<ExchangeData>> call, Throwable t) {
+            public void onFailure(Call<T> call, Throwable t) {
                 onDataCallback.onFailure(t.getLocalizedMessage());
             }
         });
