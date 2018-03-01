@@ -6,4 +6,7 @@ public class Constants {
     public static final double M2_DIVIDER = 1000000000.0;
     public static final double RESERVE_DIVIDER = 1000.0;
     public static final double BITCOIN_DIVIDER = 1000000.0;
+    public static final double INFLATION_DIVIDER = 100.0;
+    public static final double CRUDE_DIVIDER = 1000.0;
+    public static final double US_OIL_DIVIDER = 1000.0;
 }

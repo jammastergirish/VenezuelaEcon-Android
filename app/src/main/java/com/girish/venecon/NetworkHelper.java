@@ -4,9 +4,14 @@ import android.util.Log;
 
 import com.girish.venecon.api.ApiService;
 import com.girish.venecon.api.models.BitcoinData;
+import com.girish.venecon.api.models.CrudeProductionData;
 import com.girish.venecon.api.models.ExchangeData;
+import com.girish.venecon.api.models.InflationData;
 import com.girish.venecon.api.models.M2Data;
+import com.girish.venecon.api.models.MWData;
+import com.girish.venecon.api.models.OilData;
 import com.girish.venecon.api.models.ReserveData;
+import com.girish.venecon.api.models.UsOilData;
 import com.girish.venecon.utils.Constants;
 
 import java.io.IOException;
@@ -72,6 +77,36 @@ public class NetworkHelper {
     public void getBitcoinDataRetrofit(final OnDataCallback<List<BitcoinData>> onDataCallback){
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<BitcoinData>> call = apiService.getBitcoinData();
+        processCall(call, onDataCallback);
+    }
+
+    public void getOilDataRetrofit(final OnDataCallback<List<OilData>> onDataCallback){
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<OilData>> call = apiService.getOilData();
+        processCall(call, onDataCallback);
+    }
+
+    public void getMwDataRetrofit(final OnDataCallback<List<MWData>> onDataCallback){
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<MWData>> call = apiService.getMwData();
+        processCall(call, onDataCallback);
+    }
+
+    public void getInflationDataRetrofit(final OnDataCallback<List<InflationData>> onDataCallback){
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<InflationData>> call = apiService.getInflationData();
+        processCall(call, onDataCallback);
+    }
+
+    public void getCrudeProductionDataRetrofit(final OnDataCallback<List<CrudeProductionData>> onDataCallback){
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<CrudeProductionData>> call = apiService.getCrudeProductionData();
+        processCall(call, onDataCallback);
+    }
+
+    public void getUsOilDataRetrofit(final OnDataCallback<List<UsOilData>> onDataCallback){
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<UsOilData>> call = apiService.getUsOilData();
         processCall(call, onDataCallback);
     }
 
