@@ -9,6 +9,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.girish.venecon.api.models.ExchangeData;
@@ -83,14 +84,14 @@ public class FXFragment extends Fragment {
         }, 5000);
 
         NetworkHelper networkHelper = new NetworkHelper();
-        // Another idea for you Girish: Here we can display some sort of loader, progress bar, or something,
-        // And in onSuccess and onFailure we can dismiss it, just for better UX cause now while we're waiting for the response
-        // We see an empty screen and no indication that something's happening whatsoever
-        // Think about it, and let me know what you'd like to display
+
+        final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         networkHelper.getExchangeDataRetrofit(new NetworkHelper.OnDataCallback<List<ExchangeData>>() {
             @Override
             public void onSuccess(List<ExchangeData> data) {
                 fillUI(data);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -99,6 +100,7 @@ public class FXFragment extends Fragment {
                 // Cause it's always gonna be the same I'd say. I will leave this empty for now,
                 // When you figure out how you wanna do it, we'll finish the method
                 Utils.handleError(getActivity(), message);
+                progressBar.setVisibility(View.GONE);
             }
         });
 
