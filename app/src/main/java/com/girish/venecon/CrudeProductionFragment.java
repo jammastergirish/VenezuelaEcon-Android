@@ -58,6 +58,8 @@ public class CrudeProductionFragment extends Fragment {
     //public static String FRAGMENT_NAME = "Oil Prices";
 
     View myView;
+    private ChartView chartView;
+    private ShinobiChart shinobiChart;
 
     public CrudeProductionFragment() {
 
@@ -86,6 +88,10 @@ public class CrudeProductionFragment extends Fragment {
                 }
             }
         }, 5000);
+
+        chartView = myView.findViewById(R.id.Chart);
+        shinobiChart = chartView.getShinobiChart();
+        Utils.setShinobiChartBackground(shinobiChart);
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.getCrudeProductionDataRetrofit(new NetworkHelper.OnDataCallback<List<CrudeProductionData>>() {
             @Override
@@ -144,14 +150,6 @@ public class CrudeProductionFragment extends Fragment {
 
         TextView secondary4year = (TextView) myView.findViewById(R.id.secondary4year);
         Compare(secondary, YearsAgo(4), secondary4year, "notFX");
-
-        ChartView chartView = (ChartView) myView.findViewById(R.id.Chart);
-
-        ShinobiChart shinobiChart = chartView.getShinobiChart();
-
-        shinobiChart.getStyle().setBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setCanvasBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setPlotAreaBackgroundColor(Color.parseColor("#000000"));
 
         DateTimeAxis xAxis = new DateTimeAxis();
         setupXAxis(xAxis);

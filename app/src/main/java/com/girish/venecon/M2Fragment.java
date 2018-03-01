@@ -51,6 +51,8 @@ public class M2Fragment extends Fragment {
 //    public static String FRAGMENT_NAME = "Money Supply";
 
     View myView;
+    private ChartView chartView;
+    private ShinobiChart shinobiChart;
 
     public M2Fragment() {
 
@@ -80,6 +82,11 @@ public class M2Fragment extends Fragment {
                 }
             }
         }, 5000);
+
+        chartView = myView.findViewById(R.id.Chart);
+        shinobiChart = chartView.getShinobiChart();
+        Utils.setShinobiChartBackground(shinobiChart);
+
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.getM2DataRetrofit(new NetworkHelper.OnDataCallback<List<M2Data>>() {
             @Override
@@ -124,14 +131,6 @@ public class M2Fragment extends Fragment {
 
         TextView M24Year = (TextView) myView.findViewById(R.id.M24Year);
         Compare(M2, YearsAgo(4), M24Year, "notFX");
-
-        ChartView chartView = (ChartView) myView.findViewById(R.id.Chart);
-
-        ShinobiChart shinobiChart = chartView.getShinobiChart();
-
-        shinobiChart.getStyle().setBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setCanvasBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setPlotAreaBackgroundColor(Color.parseColor("#000000"));
 
         DateTimeAxis xAxis = new DateTimeAxis();
         setupXAxis(xAxis);

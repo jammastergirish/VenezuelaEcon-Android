@@ -2,8 +2,11 @@ package com.girish.venecon;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Html;
 import android.widget.TextView;
+
+import com.shinobicontrols.charts.ShinobiChart;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -234,5 +237,12 @@ public class Utils {
 
     public static void handleError(Context context, String message) {
         // TODO figure out how to display an error. I presume we're gonna need Context too, to display a Toast, or a Dialog, or anything really
+    }
+
+    public static void setShinobiChartBackground(ShinobiChart shinobiChart) {
+        int blackColor = Color.parseColor("#000000");
+        shinobiChart.getStyle().setBackgroundColor(blackColor);
+        shinobiChart.getStyle().setCanvasBackgroundColor(blackColor);
+        shinobiChart.getStyle().setPlotAreaBackgroundColor(blackColor);
     }
 }

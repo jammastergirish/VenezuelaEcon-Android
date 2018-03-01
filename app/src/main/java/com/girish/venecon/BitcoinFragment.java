@@ -48,6 +48,8 @@ public class BitcoinFragment extends Fragment {
     public static String FRAGMENT_NAME = "Bitcoin";
     private final DateRange xDefaultRange;
     View myView;
+    private ChartView chartView;
+    private ShinobiChart shinobiChart;
 
     public BitcoinFragment() {
 
@@ -78,6 +80,9 @@ public class BitcoinFragment extends Fragment {
             }
         }, 5000);
 
+        chartView = myView.findViewById(R.id.Chart);
+        shinobiChart = chartView.getShinobiChart();
+        Utils.setShinobiChartBackground(shinobiChart);
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.getBitcoinDataRetrofit(new NetworkHelper.OnDataCallback<List<BitcoinData>>() {
             @Override
@@ -118,14 +123,6 @@ public class BitcoinFragment extends Fragment {
 
         TextView Bitcoin4Year = (TextView) myView.findViewById(R.id.Bitcoin4Year);
         Utils.Compare(Bitcoin, Utils.YearsAgo(4), Bitcoin4Year, "notFX");
-
-        ChartView chartView = (ChartView) myView.findViewById(R.id.Chart);
-
-        ShinobiChart shinobiChart = chartView.getShinobiChart();
-
-        shinobiChart.getStyle().setBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setCanvasBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setPlotAreaBackgroundColor(Color.parseColor("#000000"));
 
         DateTimeAxis xAxis = new DateTimeAxis();
         setupXAxis(xAxis);

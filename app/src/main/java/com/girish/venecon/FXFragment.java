@@ -52,6 +52,8 @@ public class FXFragment extends Fragment {
 
     private final DateRange xDefaultRange;
     View myView;
+    private ChartView chartView;
+    private ShinobiChart shinobiChart;
 
 
     public FXFragment() {
@@ -86,6 +88,10 @@ public class FXFragment extends Fragment {
         NetworkHelper networkHelper = new NetworkHelper();
 
         final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
+
+        chartView = myView.findViewById(R.id.chart);
+        shinobiChart = chartView.getShinobiChart();
+        Utils.setShinobiChartBackground(shinobiChart);
         progressBar.setVisibility(View.VISIBLE);
         networkHelper.getExchangeDataRetrofit(new NetworkHelper.OnDataCallback<List<ExchangeData>>() {
             @Override
@@ -177,22 +183,11 @@ public class FXFragment extends Fragment {
 
         TextView BM5YearsAgo = (TextView) myView.findViewById(R.id.BlackMarket5Years);
         Compare(BM, YearsAgo(5), BM5YearsAgo, "FX");
-
-
-        ChartView chartView = (ChartView) myView.findViewById(R.id.chart);
-        ShinobiChart shinobiChart = chartView.getShinobiChart();
-
-
         //https://www.shinobicontrols.com/docs/android/shinobicharts/latest/user-guide/qs-draw-simple-chart.html 20171212 changing view to fragment
 //
 //                ChartFragment chartFragment =
-//                        (ChartFragment) getFragmentManager().findFragmentById(R.id.chart);
+//                        (ChartFragment) getFragmentManager().findFragmentById(R.id.Chart);
 //                ShinobiChart shinobiChart = chartFragment.getShinobiChart();
-
-
-        shinobiChart.getStyle().setBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setCanvasBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setPlotAreaBackgroundColor(Color.parseColor("#000000"));
 
         DateTimeAxis xAxis = new DateTimeAxis();
         setupXAxis(xAxis);

@@ -45,6 +45,8 @@ public class InflationFragment extends Fragment {
 
     private final DateRange xDefaultRange;
     View myView;
+    private ChartView chartView;
+    private ShinobiChart shinobiChart;
 
     public InflationFragment() {
 
@@ -73,6 +75,11 @@ public class InflationFragment extends Fragment {
                 }
             }
         }, 5000);
+
+        chartView = myView.findViewById(R.id.Chart);
+        shinobiChart = chartView.getShinobiChart();
+        Utils.setShinobiChartBackground(shinobiChart);
+
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.getInflationDataRetrofit(new NetworkHelper.OnDataCallback<List<InflationData>>() {
             @Override
@@ -122,14 +129,6 @@ public class InflationFragment extends Fragment {
 
         TextView Inflation2009 = (TextView) myView.findViewById(R.id.Inflation2009);
         Inflation2009.setText(numberFormat.format(abs(AnnualInflation(2009, Inflation))) + "%");
-
-        ChartView chartView = (ChartView) myView.findViewById(R.id.Chart);
-
-        ShinobiChart shinobiChart = chartView.getShinobiChart();
-
-        shinobiChart.getStyle().setBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setCanvasBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setPlotAreaBackgroundColor(Color.parseColor("#000000"));
 
         DateTimeAxis xAxis = new DateTimeAxis();
         setupXAxis(xAxis);

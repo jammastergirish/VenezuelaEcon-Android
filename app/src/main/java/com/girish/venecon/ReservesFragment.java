@@ -58,6 +58,8 @@ public class ReservesFragment extends Fragment {
     public static String FRAGMENT_NAME = "Foreign Reserves";
 
     View myView;
+    private ChartView chartView;
+    private ShinobiChart shinobiChart;
 
     public ReservesFragment() {
 
@@ -88,6 +90,10 @@ public class ReservesFragment extends Fragment {
                 }
             }
         }, 5000);
+
+        chartView = myView.findViewById(R.id.Chart);
+        shinobiChart = chartView.getShinobiChart();
+        Utils.setShinobiChartBackground(shinobiChart);
 
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.getReservesDataRetrofit(new NetworkHelper.OnDataCallback<List<ReserveData>>() {
@@ -131,14 +137,6 @@ public class ReservesFragment extends Fragment {
 
         TextView Reserves4Year = (TextView) myView.findViewById(R.id.Reserves4Year);
         Utils.Compare(Reserves, Utils.YearsAgo(4), Reserves4Year, "notFX");
-
-        ChartView chartView = (ChartView) myView.findViewById(R.id.Chart);
-
-        ShinobiChart shinobiChart = chartView.getShinobiChart();
-
-        shinobiChart.getStyle().setBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setCanvasBackgroundColor(Color.parseColor("#000000"));
-        shinobiChart.getStyle().setPlotAreaBackgroundColor(Color.parseColor("#000000"));
 
         DateTimeAxis xAxis = new DateTimeAxis();
         setupXAxis(xAxis);
