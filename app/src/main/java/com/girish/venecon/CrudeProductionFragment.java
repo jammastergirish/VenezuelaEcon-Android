@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.girish.venecon.api.models.CrudeProductionData;
@@ -92,16 +93,21 @@ public class CrudeProductionFragment extends Fragment {
         chartView = myView.findViewById(R.id.Chart);
         shinobiChart = chartView.getShinobiChart();
         Utils.setShinobiChartBackground(shinobiChart);
+
+        final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.getCrudeProductionDataRetrofit(new NetworkHelper.OnDataCallback<List<CrudeProductionData>>() {
             @Override
             public void onSuccess(List<CrudeProductionData> data) {
                 fillUI(data);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(String message) {
                 Utils.handleError(getActivity(), message);
+                progressBar.setVisibility(View.GONE);
             }
         });
 

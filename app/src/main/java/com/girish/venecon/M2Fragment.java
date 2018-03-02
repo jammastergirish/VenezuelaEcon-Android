@@ -9,6 +9,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.girish.venecon.api.models.M2Data;
@@ -87,16 +88,20 @@ public class M2Fragment extends Fragment {
         shinobiChart = chartView.getShinobiChart();
         Utils.setShinobiChartBackground(shinobiChart);
 
+        final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.getM2DataRetrofit(new NetworkHelper.OnDataCallback<List<M2Data>>() {
             @Override
             public void onSuccess(List<M2Data> data) {
                 fillUI(data);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(String message) {
                 Utils.handleError(getActivity(), message);
+                progressBar.setVisibility(View.GONE);
             }
         });
 

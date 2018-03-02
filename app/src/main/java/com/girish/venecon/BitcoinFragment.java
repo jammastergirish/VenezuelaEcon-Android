@@ -9,6 +9,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.girish.venecon.api.models.BitcoinData;
@@ -83,16 +84,21 @@ public class BitcoinFragment extends Fragment {
         chartView = myView.findViewById(R.id.Chart);
         shinobiChart = chartView.getShinobiChart();
         Utils.setShinobiChartBackground(shinobiChart);
+
+        final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.getBitcoinDataRetrofit(new NetworkHelper.OnDataCallback<List<BitcoinData>>() {
             @Override
             public void onSuccess(List<BitcoinData> data) {
                 fillUI(data);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(String message) {
                 Utils.handleError(getActivity(), message);
+                progressBar.setVisibility(View.GONE);
             }
         });
         return myView;

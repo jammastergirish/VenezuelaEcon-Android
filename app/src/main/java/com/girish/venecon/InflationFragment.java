@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.girish.venecon.api.models.InflationData;
@@ -80,16 +81,20 @@ public class InflationFragment extends Fragment {
         shinobiChart = chartView.getShinobiChart();
         Utils.setShinobiChartBackground(shinobiChart);
 
+        final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.getInflationDataRetrofit(new NetworkHelper.OnDataCallback<List<InflationData>>() {
             @Override
             public void onSuccess(List<InflationData> data) {
                 fillUI(data);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(String message) {
                 Utils.handleError(getActivity(), message);
+                progressBar.setVisibility(View.GONE);
             }
         });
 

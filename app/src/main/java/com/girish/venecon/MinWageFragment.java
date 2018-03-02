@@ -9,6 +9,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.girish.venecon.api.models.MWData;
@@ -85,16 +86,20 @@ public class MinWageFragment extends Fragment {
         shinobiChart = chartView.getShinobiChart();
         Utils.setShinobiChartBackground(shinobiChart);
 
+        final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.getMwDataRetrofit(new NetworkHelper.OnDataCallback<List<MWData>>() {
             @Override
             public void onSuccess(List<MWData> data) {
                 fillUI(data);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(String message) {
                 Utils.handleError(getActivity(), message);
+                progressBar.setVisibility(View.GONE);
             }
         });
 
