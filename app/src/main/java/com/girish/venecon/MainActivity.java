@@ -87,8 +87,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_second_layout) {
             changeToFragment(new ReservesFragment(), mContext.getString(R.string.foreign_reserves));
 
-        } else if (id == R.id.bitcoin) {
-            changeToFragment(new BitcoinFragment(), "Bitcoin");
+//        } else if (id == R.id.bitcoin) {
+//            changeToFragment(new BitcoinFragment(), "Bitcoin");
         }
         else if (id == R.id.m2) {
             changeToFragment(new M2Fragment(), mContext.getString(R.string.money_supply));

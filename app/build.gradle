@@ -8,8 +8,8 @@ android {
         applicationId 'com.girish.venecon'
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 14
-        versionName "1.9.5" // Girish test
+        versionCode 15
+        versionName "1.9.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
