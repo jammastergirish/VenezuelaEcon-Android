@@ -10,8 +10,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.girish.venecon.api.models.CrudeProductionData;
+import com.girish.venecon.utils.Constants;
 import com.shinobicontrols.charts.ChartView;
 import com.shinobicontrols.charts.DataAdapter;
 import com.shinobicontrols.charts.DataPoint;
@@ -36,6 +39,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import static com.girish.venecon.Utils.Compare;
 import static com.girish.venecon.Utils.GetLatestNonZeroValue;
@@ -55,6 +59,8 @@ public class CrudeProductionFragment extends Fragment {
     //public static String FRAGMENT_NAME = "Oil Prices";
 
     View myView;
+    private ChartView chartView;
+    private ShinobiChart shinobiChart;
 
     public CrudeProductionFragment() {
 
@@ -84,147 +90,107 @@ public class CrudeProductionFragment extends Fragment {
             }
         }, 5000);
 
-        new MyAsyncTask().execute();
+        chartView = myView.findViewById(R.id.Chart);
+        shinobiChart = chartView.getShinobiChart();
+        Utils.setShinobiChartBackground(shinobiChart);
+
+        final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        NetworkHelper networkHelper = new NetworkHelper();
+        networkHelper.getCrudeProductionDataRetrofit(new NetworkHelper.OnDataCallback<List<CrudeProductionData>>() {
+            @Override
+            public void onSuccess(List<CrudeProductionData> data) {
+                fillUI(data);
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                Utils.handleError(getActivity(), message);
+                progressBar.setVisibility(View.GONE);
+            }
+        });
 
         return myView;
     }
 
-    private class MyAsyncTask extends AsyncTask<Void, Void, String>{
+    private void fillUI(List<CrudeProductionData> dataList) {
+        LinkedHashMap<String, Double> direct = new LinkedHashMap<>();
+        LinkedHashMap<String, Double> secondary = new LinkedHashMap<>();
 
-        @Override
-        protected String doInBackground(Void... empty) {
-            NetworkHelper NetHelp = new NetworkHelper();
-            String UnparsedResult = NetHelp.getCrudeProductionData();
-            return UnparsedResult;
+        for (CrudeProductionData crude : dataList) {
+            direct.put(crude.getDate(), crude.getDirect() / Constants.CRUDE_DIVIDER);
+            secondary.put(crude.getDate(), crude.getSecondary() / Constants.CRUDE_DIVIDER);
         }
 
-        @Override
-        protected void onPostExecute(String s) {
+        SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        NumberFormat numberFormat = NumberFormat.getInstance();
 
 
-            if (TextUtils.isEmpty(s)) {
-                Toast.makeText(getActivity(),
-                        "Something went wrong. Please check your connection.", Toast.LENGTH_SHORT).show();
-            } else {
+        TextView directTV = (TextView) myView.findViewById(R.id.directVal);
+        directTV.setText(Html.fromHtml(numberFormat.format(GetLatestNonZeroValue(direct, DateFormat.format(new Date()))) + "<small><small><small><small>m " + mContext.getString(R.string.barrelsper) + " " + mContext.getString(R.string.day) + "</small></small></small>"));
 
-                JSONArray jsonArray;
-                JSONObject jsonObject;
+        TextView direct1year = (TextView) myView.findViewById(R.id.direct1year);
+        Compare(direct, YearsAgo(1), direct1year, "notFX");
 
+        TextView direct2year = (TextView) myView.findViewById(R.id.direct2year);
+        Compare(direct, YearsAgo(2), direct2year, "notFX");
 
-                String jsonDate;
+        TextView direct3year = (TextView) myView.findViewById(R.id.direct3year);
+        Compare(direct, YearsAgo(3), direct3year, "notFX");
 
-                String jsondirect;
-                LinkedHashMap<String, Double> direct = new LinkedHashMap<String, Double>();
+        TextView direct4year = (TextView) myView.findViewById(R.id.direct4year);
+        Compare(direct, YearsAgo(4), direct4year, "notFX");
 
-                String jsonsecondary;
-                LinkedHashMap<String, Double> secondary = new LinkedHashMap<String, Double>();
+        TextView secondaryTV = (TextView) myView.findViewById(R.id.secondaryVal);
+        secondaryTV.setText(Html.fromHtml(numberFormat.format(GetLatestNonZeroValue(secondary, DateFormat.format(new Date()))) + "<small><small><small><small>m " + mContext.getString(R.string.barrelsper) + " " + mContext.getString(R.string.day) + "</small></small></small>"));
 
+        TextView secondary1year = (TextView) myView.findViewById(R.id.secondary1year);
+        Compare(secondary, YearsAgo(1), secondary1year, "notFX");
 
-                try {
-                    jsonArray = new JSONArray(s);
+        TextView secondary2year = (TextView) myView.findViewById(R.id.secondary2year);
+        Compare(secondary, YearsAgo(2), secondary2year, "notFX");
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
+        TextView secondary3year = (TextView) myView.findViewById(R.id.secondary3year);
+        Compare(secondary, YearsAgo(3), secondary3year, "notFX");
 
-                        jsonObject = jsonArray.getJSONObject(i);
-                        jsonDate = jsonObject.getString("date");
+        TextView secondary4year = (TextView) myView.findViewById(R.id.secondary4year);
+        Compare(secondary, YearsAgo(4), secondary4year, "notFX");
 
-                        jsondirect = jsonObject.getString("direct");
-                        direct.put(jsonDate, Double.valueOf(jsondirect) / 1000);
+        DateTimeAxis xAxis = new DateTimeAxis();
+        setupXAxis(xAxis);
+        xAxis.setTitle(mContext.getString(R.string.date));
+        xAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        xAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
+        xAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
+        xAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        xAxis.setMajorTickFrequency(new DateFrequency(4, DateFrequency.Denomination.YEARS)); // On Eddie's advice 20161025
+        shinobiChart.addXAxis(xAxis);
 
-                        jsonsecondary = jsonObject.getString("secondary");
-                        secondary.put(jsonDate, Double.valueOf(jsonsecondary) / 1000);
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setDefaultRange(new NumberRange(0.0, 1.05 * Collections.max(direct.values())));
+        yAxis.setTitle(mContext.getString(R.string.crude_production) + " (m " + mContext.getString(R.string.barrelsper) + " " + mContext.getString(R.string.day) + ")");
+        yAxis.setRangePaddingHigh(100.0);
+        yAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        yAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
+        yAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
+        yAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        yAxis.getTickMarkClippingModeHigh();
+        shinobiChart.addYAxis(yAxis);
 
+        final LineSeries directLine = new LineSeries();
+        directLine.getStyle().setLineColor(Color.GREEN);
+        directLine.getStyle().setLineWidth((float) 2);
+        shinobiChart.addSeries(directLine);
 
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    //Wasn't JSON
-                }
+        final LineSeries secondaryLine = new LineSeries();
+        secondaryLine.getStyle().setLineColor(Color.RED);
+        secondaryLine.getStyle().setLineWidth((float) 2);
+        shinobiChart.addSeries(secondaryLine);
 
-                SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                NumberFormat numberFormat = NumberFormat.getInstance();
+        LinkedHashMap[] HMArray = {direct, secondary};
 
-
-                TextView directTV = (TextView) myView.findViewById(R.id.directVal);
-                directTV.setText(Html.fromHtml(numberFormat.format(GetLatestNonZeroValue(direct, DateFormat.format(new Date()))) + "<small><small><small><small>m " + mContext.getString(R.string.barrelsper) + " " + mContext.getString(R.string.day) + "</small></small></small>"));
-
-                TextView direct1year = (TextView) myView.findViewById(R.id.direct1year);
-                Compare(direct, YearsAgo(1), direct1year, "notFX");
-
-                TextView direct2year = (TextView) myView.findViewById(R.id.direct2year);
-                Compare(direct, YearsAgo(2), direct2year, "notFX");
-
-                TextView direct3year = (TextView) myView.findViewById(R.id.direct3year);
-                Compare(direct, YearsAgo(3), direct3year, "notFX");
-
-                TextView direct4year = (TextView) myView.findViewById(R.id.direct4year);
-                Compare(direct, YearsAgo(4), direct4year, "notFX");
-
-
-                TextView secondaryTV = (TextView) myView.findViewById(R.id.secondaryVal);
-                secondaryTV.setText(Html.fromHtml(numberFormat.format(GetLatestNonZeroValue(secondary, DateFormat.format(new Date()))) + "<small><small><small><small>m " + mContext.getString(R.string.barrelsper) + " " + mContext.getString(R.string.day) + "</small></small></small>"));
-
-                TextView secondary1year = (TextView) myView.findViewById(R.id.secondary1year);
-                Compare(secondary, YearsAgo(1), secondary1year, "notFX");
-
-                TextView secondary2year = (TextView) myView.findViewById(R.id.secondary2year);
-                Compare(secondary, YearsAgo(2), secondary2year, "notFX");
-
-                TextView secondary3year = (TextView) myView.findViewById(R.id.secondary3year);
-                Compare(secondary, YearsAgo(3), secondary3year, "notFX");
-
-                TextView secondary4year = (TextView) myView.findViewById(R.id.secondary4year);
-                Compare(secondary, YearsAgo(4), secondary4year, "notFX");
-
-
-                ChartView chartView = (ChartView) myView.findViewById(R.id.Chart);
-
-                ShinobiChart shinobiChart = chartView.getShinobiChart();
-
-                shinobiChart.getStyle().setBackgroundColor(Color.parseColor("#000000"));
-                shinobiChart.getStyle().setCanvasBackgroundColor(Color.parseColor("#000000"));
-                shinobiChart.getStyle().setPlotAreaBackgroundColor(Color.parseColor("#000000"));
-
-                DateTimeAxis xAxis = new DateTimeAxis();
-                setupXAxis(xAxis);
-                xAxis.setTitle(mContext.getString(R.string.date));
-                xAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                xAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
-                xAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
-                xAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                xAxis.setMajorTickFrequency(new DateFrequency(4, DateFrequency.Denomination.YEARS)); // On Eddie's advice 20161025
-                shinobiChart.addXAxis(xAxis);
-
-                NumberAxis yAxis = new NumberAxis();
-                yAxis.setDefaultRange(new NumberRange(0.0, 1.05 * Collections.max(direct.values())));
-                yAxis.setTitle(mContext.getString(R.string.crude_production) + " (m " + mContext.getString(R.string.barrelsper) + " " + mContext.getString(R.string.day) + ")");
-                yAxis.setRangePaddingHigh(100.0);
-                yAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                yAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
-                yAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
-                yAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                yAxis.getTickMarkClippingModeHigh();
-                shinobiChart.addYAxis(yAxis);
-
-                final LineSeries directLine = new LineSeries();
-                directLine.getStyle().setLineColor(Color.GREEN);
-                directLine.getStyle().setLineWidth((float) 2);
-                shinobiChart.addSeries(directLine);
-
-                final LineSeries secondaryLine = new LineSeries();
-                secondaryLine.getStyle().setLineColor(Color.RED);
-                secondaryLine.getStyle().setLineWidth((float) 2);
-                shinobiChart.addSeries(secondaryLine);
-
-
-                LinkedHashMap[] HMArray = {direct, secondary};
-
-                populateChartWithData(HMArray, shinobiChart);
-
-
-            }
-        }
-
+        populateChartWithData(HMArray, shinobiChart);
     }
 
     private void setupXAxis(DateTimeAxis xAxis) {

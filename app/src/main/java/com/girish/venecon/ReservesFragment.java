@@ -10,8 +10,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.girish.venecon.api.models.ExchangeData;
+import com.girish.venecon.api.models.ReserveData;
+import com.girish.venecon.utils.Constants;
 import com.shinobicontrols.charts.ChartView;
 import com.shinobicontrols.charts.DataAdapter;
 import com.shinobicontrols.charts.DataPoint;
@@ -35,6 +39,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import com.google.android.gms.ads.InterstitialAd; // 20171130
 import com.google.android.gms.ads.AdRequest;
@@ -54,6 +59,8 @@ public class ReservesFragment extends Fragment {
     public static String FRAGMENT_NAME = "Foreign Reserves";
 
     View myView;
+    private ChartView chartView;
+    private ShinobiChart shinobiChart;
 
     public ReservesFragment() {
 
@@ -85,120 +92,85 @@ public class ReservesFragment extends Fragment {
             }
         }, 5000);
 
+        chartView = myView.findViewById(R.id.Chart);
+        shinobiChart = chartView.getShinobiChart();
+        Utils.setShinobiChartBackground(shinobiChart);
 
+        final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        NetworkHelper networkHelper = new NetworkHelper();
+        networkHelper.getReservesDataRetrofit(new NetworkHelper.OnDataCallback<List<ReserveData>>() {
+            @Override
+            public void onSuccess(List<ReserveData> data) {
+                fillUI(data);
+                progressBar.setVisibility(View.GONE);
+            }
 
-        new MyAsyncTask().execute();
+            @Override
+            public void onFailure(String message) {
+                Utils.handleError(getActivity(), message);
+                progressBar.setVisibility(View.GONE);
+            }
+        });
 
         return myView;
     }
 
-    private class MyAsyncTask extends AsyncTask<Void, Void, String>{
-
-        @Override
-        protected String doInBackground(Void... empty) {
-            NetworkHelper NetHelp = new NetworkHelper();
-            String UnparsedResult = NetHelp.getReservesData();
-            return UnparsedResult;
+    private void fillUI(List<ReserveData> dataList) {
+        LinkedHashMap<String, Double> Reserves = new LinkedHashMap<>();
+        for (ReserveData reserveData : dataList) {
+            Reserves.put(reserveData.getDate(), reserveData.getRes() / Constants.RESERVE_DIVIDER);
         }
 
-        @Override
-        protected void onPostExecute(String s) {
+        SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        NumberFormat numberFormat = NumberFormat.getInstance();
 
-            if (TextUtils.isEmpty(s)) {
-                Toast.makeText(getActivity(),
-                        "Something went wrong. Please check your connection.", Toast.LENGTH_SHORT).show();
-            } else {
+        TextView ReservesTV = (TextView) myView.findViewById(R.id.ReservesVal);
+        ReservesTV.setText(Html.fromHtml("$" + numberFormat.format(Utils.GetLatestNonZeroValue(Reserves, DateFormat.format(new Date()))) + "<small><small><small><small> " + mContext.getString(R.string.billion) + "</small></small></small>"));
 
+        TextView ReservesMonth = (TextView) myView.findViewById(R.id.ReservesMonth);
+        Utils.Compare(Reserves, Utils.MonthsAgo(1), ReservesMonth, "notFX");
 
-                JSONArray jsonArray;
-                JSONObject jsonObject;
+        TextView ReservesYear = (TextView) myView.findViewById(R.id.ReservesYear);
+        Utils.Compare(Reserves, Utils.YearsAgo(1), ReservesYear, "notFX");
 
+        TextView Reserves2Year = (TextView) myView.findViewById(R.id.Reserves2Year);
+        Utils.Compare(Reserves, Utils.YearsAgo(2), Reserves2Year, "notFX");
 
-                String jsonDate;
-                String jsonReserves;
-                LinkedHashMap<String, Double> Reserves = new LinkedHashMap<String, Double>();
+        TextView Reserves3Year = (TextView) myView.findViewById(R.id.Reserves3Year);
+        Utils.Compare(Reserves, Utils.YearsAgo(3), Reserves3Year, "notFX");
 
-                try {
-                    jsonArray = new JSONArray(s);
+        TextView Reserves4Year = (TextView) myView.findViewById(R.id.Reserves4Year);
+        Utils.Compare(Reserves, Utils.YearsAgo(4), Reserves4Year, "notFX");
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
+        DateTimeAxis xAxis = new DateTimeAxis();
+        setupXAxis(xAxis);
+        xAxis.setTitle(mContext.getString(R.string.date));
+        xAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        xAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
+        xAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
+        xAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        shinobiChart.addXAxis(xAxis);
 
-                        jsonObject = jsonArray.getJSONObject(i);
-                        jsonDate = jsonObject.getString("date");
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setDefaultRange(new NumberRange(0.0, 1.05 * Collections.max(Reserves.values())));
+        yAxis.setTitle(mContext.getString(R.string.foreign_reserves) + " ($ bn)");
+        yAxis.setRangePaddingHigh(100.0);
+        yAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        yAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
+        yAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
+        yAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        yAxis.getTickMarkClippingModeHigh();
+        shinobiChart.addYAxis(yAxis);
 
-                        jsonReserves = jsonObject.getString("res");
-                        Reserves.put(jsonDate, Double.valueOf(jsonReserves) / 1000.0);
+        final LineSeries ResLine = new LineSeries();
+        ResLine.getStyle().setLineColor(Color.RED);
+        ResLine.getStyle().setLineWidth((float) 2);
+        shinobiChart.addSeries(ResLine);
 
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    //Wasn't JSON
-                }
+        LinkedHashMap[] HMArray = {Reserves};
 
-                SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                NumberFormat numberFormat = NumberFormat.getInstance();
-
-                TextView ReservesTV = (TextView) myView.findViewById(R.id.ReservesVal);
-                ReservesTV.setText(Html.fromHtml("$" + numberFormat.format(Utils.GetLatestNonZeroValue(Reserves, DateFormat.format(new Date()))) + "<small><small><small><small> " + mContext.getString(R.string.billion) + "</small></small></small>"));
-
-                TextView ReservesMonth = (TextView) myView.findViewById(R.id.ReservesMonth);
-                Utils.Compare(Reserves, Utils.MonthsAgo(1), ReservesMonth, "notFX");
-
-                TextView ReservesYear = (TextView) myView.findViewById(R.id.ReservesYear);
-                Utils.Compare(Reserves, Utils.YearsAgo(1), ReservesYear, "notFX");
-
-                TextView Reserves2Year = (TextView) myView.findViewById(R.id.Reserves2Year);
-                Utils.Compare(Reserves, Utils.YearsAgo(2), Reserves2Year, "notFX");
-
-                TextView Reserves3Year = (TextView) myView.findViewById(R.id.Reserves3Year);
-                Utils.Compare(Reserves, Utils.YearsAgo(3), Reserves3Year, "notFX");
-
-                TextView Reserves4Year = (TextView) myView.findViewById(R.id.Reserves4Year);
-                Utils.Compare(Reserves, Utils.YearsAgo(4), Reserves4Year, "notFX");
-
-
-                ChartView chartView = (ChartView) myView.findViewById(R.id.Chart);
-
-                ShinobiChart shinobiChart = chartView.getShinobiChart();
-
-                shinobiChart.getStyle().setBackgroundColor(Color.parseColor("#000000"));
-                shinobiChart.getStyle().setCanvasBackgroundColor(Color.parseColor("#000000"));
-                shinobiChart.getStyle().setPlotAreaBackgroundColor(Color.parseColor("#000000"));
-
-                DateTimeAxis xAxis = new DateTimeAxis();
-                setupXAxis(xAxis);
-                xAxis.setTitle(mContext.getString(R.string.date));
-                xAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                xAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
-                xAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
-                xAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                shinobiChart.addXAxis(xAxis);
-
-                NumberAxis yAxis = new NumberAxis();
-                yAxis.setDefaultRange(new NumberRange(0.0, 1.05 * Collections.max(Reserves.values())));
-                yAxis.setTitle(mContext.getString(R.string.foreign_reserves) + " ($ bn)");
-                yAxis.setRangePaddingHigh(100.0);
-                yAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                yAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
-                yAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
-                yAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                yAxis.getTickMarkClippingModeHigh();
-                shinobiChart.addYAxis(yAxis);
-
-                final LineSeries ResLine = new LineSeries();
-                ResLine.getStyle().setLineColor(Color.RED);
-                ResLine.getStyle().setLineWidth((float) 2);
-                shinobiChart.addSeries(ResLine);
-
-                LinkedHashMap[] HMArray = {Reserves};
-
-                populateChartWithData(HMArray, shinobiChart);
-
-
-            }
-
-        }
-
+        populateChartWithData(HMArray, shinobiChart);
     }
 
     private void setupXAxis(DateTimeAxis xAxis) {

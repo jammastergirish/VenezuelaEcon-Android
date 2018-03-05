@@ -1,17 +1,20 @@
 package com.girish.venecon;
 
-import android.graphics.Color;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
-import android.text.TextUtils;
-import android.view.View;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.girish.venecon.api.models.MWData;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.shinobicontrols.charts.ChartView;
 import com.shinobicontrols.charts.DataAdapter;
 import com.shinobicontrols.charts.DataPoint;
@@ -23,10 +26,6 @@ import com.shinobicontrols.charts.NumberRange;
 import com.shinobicontrols.charts.ShinobiChart;
 import com.shinobicontrols.charts.SimpleDataAdapter;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,16 +34,12 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import static com.girish.venecon.Utils.Compare;
 import static com.girish.venecon.Utils.GetLatestNonZeroValue;
 import static com.girish.venecon.Utils.YearsAgo;
 import static com.girish.venecon.Utils.mContext;
-
-import com.google.android.gms.ads.InterstitialAd; // 20171130
-import com.google.android.gms.ads.AdRequest;
-import android.os.*;
-import android.widget.Toast;
 
 /**
  * Created by girish on 02/10/2016.
@@ -53,7 +48,10 @@ import android.widget.Toast;
 public class MinWageFragment extends Fragment {
 
 
+    private final DateRange xDefaultRange;
     View myView;
+    private ChartView chartView;
+    private ShinobiChart shinobiChart;
 
     public MinWageFragment() {
 
@@ -84,113 +82,84 @@ public class MinWageFragment extends Fragment {
             }
         }, 5000);
 
-        new MyAsyncTask().execute();
+        chartView = myView.findViewById(R.id.Chart);
+        shinobiChart = chartView.getShinobiChart();
+        Utils.setShinobiChartBackground(shinobiChart);
+
+        final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        NetworkHelper networkHelper = new NetworkHelper();
+        networkHelper.getMwDataRetrofit(new NetworkHelper.OnDataCallback<List<MWData>>() {
+            @Override
+            public void onSuccess(List<MWData> data) {
+                fillUI(data);
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                Utils.handleError(getActivity(), message);
+                progressBar.setVisibility(View.GONE);
+            }
+        });
 
         return myView;
     }
 
-    private class MyAsyncTask extends AsyncTask<Void, Void, String>{
+    private void fillUI(List<MWData> dataList) {
 
-        @Override
-        protected String doInBackground(Void... empty) {
-            NetworkHelper NetHelp = new NetworkHelper();
-            String UnparsedResult = NetHelp.getMWData();
-            return UnparsedResult;
+        LinkedHashMap<String, Double> MW = new LinkedHashMap<String, Double>();
+
+        for (MWData mwData : dataList) {
+            MW.put(mwData.getDate(), mwData.getUsd_bm());
         }
 
-        @Override
-        protected void onPostExecute(String s) {
+        SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        NumberFormat numberFormat = NumberFormat.getInstance();
 
-            if (TextUtils.isEmpty(s)) {
-                Toast.makeText(getActivity(),
-                        "Something went wrong. Please check your connection.", Toast.LENGTH_SHORT).show();
-            } else {
+        TextView MWTV = (TextView) myView.findViewById(R.id.MWVal);
+        MWTV.setText(Html.fromHtml("$" + numberFormat.format(GetLatestNonZeroValue(MW, DateFormat.format(new Date()))) + "<small><small><small><small> / " + mContext.getString(R.string.month2) + ")</small></small></small>"));
 
-                JSONArray jsonArray;
-                JSONObject jsonObject;
+        TextView MWYear = (TextView) myView.findViewById(R.id.MWYear);
+        Compare(MW, YearsAgo(1), MWYear, "notFX");
 
+        TextView MW2Year = (TextView) myView.findViewById(R.id.MW2Year);
+        Compare(MW, YearsAgo(2), MW2Year, "notFX");
 
-                String jsonDate;
-                String jsonMW;
-                LinkedHashMap<String, Double> MW = new LinkedHashMap<String, Double>();
+        TextView MW3Year = (TextView) myView.findViewById(R.id.MW3Year);
+        Compare(MW, YearsAgo(3), MW3Year, "notFX");
 
-                try {
-                    jsonArray = new JSONArray(s);
+        TextView MW4Year = (TextView) myView.findViewById(R.id.MW4Year);
+        Compare(MW, YearsAgo(4), MW4Year, "notFX");
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
+        DateTimeAxis xAxis = new DateTimeAxis();
+        setupXAxis(xAxis);
+        xAxis.setTitle(mContext.getString(R.string.date));
+        xAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        xAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
+        xAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
+        xAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        shinobiChart.addXAxis(xAxis);
 
-                        jsonObject = jsonArray.getJSONObject(i);
-                        jsonDate = jsonObject.getString("date");
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setDefaultRange(new NumberRange(0.0, 1.05 * Collections.max(MW.values())));
+        yAxis.setTitle(mContext.getString(R.string.minimum_wage) + " ($ / " + mContext.getString(R.string.month2) + ")");
+        yAxis.setRangePaddingHigh(100.0);
+        yAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        yAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
+        yAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
+        yAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
+        yAxis.getTickMarkClippingModeHigh();
+        shinobiChart.addYAxis(yAxis);
 
-                        jsonMW = jsonObject.getString("usd_bm");
-                        MW.put(jsonDate, Double.valueOf(jsonMW));
+        final LineSeries ResLine = new LineSeries();
+        ResLine.getStyle().setLineColor(Color.RED);
+        ResLine.getStyle().setLineWidth((float) 2);
+        shinobiChart.addSeries(ResLine);
 
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    //Wasn't JSON
-                }
+        LinkedHashMap[] HMArray = {MW};
 
-                SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                NumberFormat numberFormat = NumberFormat.getInstance();
-
-                TextView MWTV = (TextView) myView.findViewById(R.id.MWVal);
-                MWTV.setText(Html.fromHtml("$" + numberFormat.format(GetLatestNonZeroValue(MW, DateFormat.format(new Date()))) + "<small><small><small><small> / " + mContext.getString(R.string.month2) + ")</small></small></small>"));
-
-                TextView MWYear = (TextView) myView.findViewById(R.id.MWYear);
-                Compare(MW, YearsAgo(1), MWYear, "notFX");
-
-                TextView MW2Year = (TextView) myView.findViewById(R.id.MW2Year);
-                Compare(MW, YearsAgo(2), MW2Year, "notFX");
-
-                TextView MW3Year = (TextView) myView.findViewById(R.id.MW3Year);
-                Compare(MW, YearsAgo(3), MW3Year, "notFX");
-
-                TextView MW4Year = (TextView) myView.findViewById(R.id.MW4Year);
-                Compare(MW, YearsAgo(4), MW4Year, "notFX");
-
-
-                ChartView chartView = (ChartView) myView.findViewById(R.id.Chart);
-
-                ShinobiChart shinobiChart = chartView.getShinobiChart();
-
-                shinobiChart.getStyle().setBackgroundColor(Color.parseColor("#000000"));
-                shinobiChart.getStyle().setCanvasBackgroundColor(Color.parseColor("#000000"));
-                shinobiChart.getStyle().setPlotAreaBackgroundColor(Color.parseColor("#000000"));
-
-                DateTimeAxis xAxis = new DateTimeAxis();
-                setupXAxis(xAxis);
-                xAxis.setTitle(mContext.getString(R.string.date));
-                xAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                xAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
-                xAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
-                xAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                shinobiChart.addXAxis(xAxis);
-
-                NumberAxis yAxis = new NumberAxis();
-                yAxis.setDefaultRange(new NumberRange(0.0, 1.05 * Collections.max(MW.values())));
-                yAxis.setTitle(mContext.getString(R.string.minimum_wage) + " ($ / " + mContext.getString(R.string.month2) + ")");
-                yAxis.setRangePaddingHigh(100.0);
-                yAxis.getStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                yAxis.getStyle().getTitleStyle().setTextColor(Color.parseColor("#FFFFFF"));
-                yAxis.getStyle().getTickStyle().setLabelColor(Color.parseColor("#FFFFFF"));
-                yAxis.getStyle().getTickStyle().setLineColor(Color.parseColor("#FFFFFF"));
-                yAxis.getTickMarkClippingModeHigh();
-                shinobiChart.addYAxis(yAxis);
-
-                final LineSeries ResLine = new LineSeries();
-                ResLine.getStyle().setLineColor(Color.RED);
-                ResLine.getStyle().setLineWidth((float) 2);
-                shinobiChart.addSeries(ResLine);
-
-                LinkedHashMap[] HMArray = {MW};
-
-                populateChartWithData(HMArray, shinobiChart);
-
-
-            }
-
-        }
+        populateChartWithData(HMArray, shinobiChart);
     }
 
     private void setupXAxis(DateTimeAxis xAxis) {
@@ -200,9 +169,6 @@ public class MinWageFragment extends Fragment {
         xAxis.enableMomentumPanning(true);
         xAxis.enableMomentumZooming(true);
     }
-
-    private final DateRange xDefaultRange;
-
 
     private void populateChartWithData(LinkedHashMap<String, Double>[] HM, ShinobiChart shinobiChart) {
 
@@ -217,7 +183,7 @@ public class MinWageFragment extends Fragment {
 
             for (String dateString : HM[i].keySet()) {
                 Double value = HM[i].get(dateString);
-                if (value!=0) {
+                if (value != 0) {
                     Date date = null;
                     try {
                         date = dateFormat.parse(dateString);
