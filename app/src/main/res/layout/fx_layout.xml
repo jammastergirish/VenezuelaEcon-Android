@@ -1,155 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="#000000">
+    android:background="#000000"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8
-        ">
-
-        <!-- Remember, WeightSum if want to specify number of units-->
-
-
-    <LinearLayout
-        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
-
-
-        <TextView
-            android:text="@string/dicomtextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/DICOMTextView"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:textSize="12dp"
-            android:textColor="#ffd500"></TextView>
-        <TextView
-            android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/DicomVal"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:paddingLeft="10dp"
-            android:textSize="25dp"
-            android:textColor="#FFFFFF"></TextView>
-        <!--<TextView-->
-            <!--android:text=""-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/SimadiYesterday"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:paddingLeft="10dp"-->
-            <!--android:textSize="12dp"-->
-            <!--android:textColor="#FFFFFF"></TextView>-->
-        <TextView
-            android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/DicomMonth"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:paddingLeft="10dp"
-            android:textSize="12dp"
-            android:textColor="#FFFFFF"></TextView>
-        <!--<TextView-->
-            <!--android:text=""-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/SimadiYear"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:paddingLeft="10dp"-->
-            <!--android:textSize="12dp"-->
-            <!--android:textColor="#FFFFFF"></TextView>-->
-
-
-        <!--<TextView-->
-            <!--android:text="@string/officialtextview"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/OfficialTextView"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:paddingLeft="10dp"-->
-            <!--android:layout_marginTop="15dp"-->
-            <!--android:textSize="12dp"-->
-            <!--android:textColor="#59ff00"></TextView>-->
-        <!--<TextView-->
-            <!--android:text=""-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/OfficialVal"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:paddingLeft="10dp"-->
-            <!--android:textSize="25dp"-->
-            <!--android:textColor="#FFFFFF"></TextView>-->
-
-        <TextView
-            android:text="@string/M2_Restextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/M2_ResTextView"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:textSize="12dp"
-            android:textColor="#FFFFFF" />
-
-        <TextView
-            android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/M2_ResVal"
-            android:layout_alignParentTop="true"
-            android:paddingLeft="10dp"
-            android:textSize="25dp"
-            android:textColor="#FFFFFF" />
-
-
-
-    </LinearLayout>
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8">
+            <!-- Remember, WeightSum if want to specify number of units-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:text="@string/blackmarkettextview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/BlackMarketTextView"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:textSize="12dp"
-                android:textColor="#ff0000"></TextView>
-            <TextView
-                android:text=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/BlackMarketVal"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:paddingLeft="10dp"
-                android:textSize="25dp"
-                android:textColor="#FFFFFF"></TextView>
-            <!--<TextView-->
+                <TextView
+                    android:id="@+id/DICOMTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/dicomtextview"
+                    android:textColor="#ffd500"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/DicomVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25dp" />
+                <!--<TextView-->
+                <!--android:text=""-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/SimadiYesterday"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:textSize="12dp"-->
+                <!--android:textColor="#FFFFFF"></TextView>-->
+                <TextView
+                    android:id="@+id/DicomMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+                <!--<TextView-->
+                <!--android:text=""-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/SimadiYear"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:textSize="12dp"-->
+                <!--android:textColor="#FFFFFF"></TextView>-->
+
+
+                <!--<TextView-->
+                <!--android:text="@string/officialtextview"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/OfficialTextView"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:textSize="12dp"-->
+                <!--android:textColor="#59ff00"></TextView>-->
+                <!--<TextView-->
+                <!--android:text=""-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/OfficialVal"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:textSize="25dp"-->
+                <!--android:textColor="#FFFFFF"></TextView>-->
+
+                <TextView
+                    android:id="@+id/M2_ResTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/M2_Restextview"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/M2_ResVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/BlackMarketTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/blackmarkettextview"
+                    android:textColor="#ff0000"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/BlackMarketVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25dp" />
+                <!--<TextView-->
                 <!--android:text="5% from yesterday"-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
@@ -159,97 +160,97 @@
                 <!--android:paddingLeft="10dp"-->
                 <!--android:textSize="12dp"-->
                 <!--android:textColor="#FFFFFF"></TextView>-->
-            <TextView
-                android:text=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/BlackMarketMonth"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:paddingLeft="10dp"
-                android:textSize="12dp"
-                android:textColor="#FFFFFF"></TextView>
-            <TextView
-                android:text=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/BlackMarketYear"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:paddingLeft="10dp"
-                android:textSize="12dp"
-                android:textColor="#FFFFFF"></TextView>
-            <TextView
-                android:text=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/BlackMarket2Years"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:paddingLeft="10dp"
-                android:textSize="12dp"
-                android:textColor="#FFFFFF"></TextView>
-            <TextView
-                android:text=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/BlackMarket3Years"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:paddingLeft="10dp"
-                android:textSize="12dp"
-                android:textColor="#FFFFFF"></TextView>
-            <TextView
-                android:text=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/BlackMarket4Years"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:paddingLeft="10dp"
-                android:textSize="12dp"
-                android:textColor="#FFFFFF"></TextView>
-            <TextView
-                android:text=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/BlackMarket5Years"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:paddingLeft="10dp"
-                android:textSize="12dp"
-                android:textColor="#FFFFFF"></TextView>
+                <TextView
+                    android:id="@+id/BlackMarketMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/BlackMarketYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/BlackMarket2Years"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/BlackMarket3Years"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/BlackMarket4Years"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/BlackMarket5Years"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
 
-
-
-    </LinearLayout>
-
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.2"
-        android:layout_marginTop="5dp">
-
-
-        <com.shinobicontrols.charts.ChartView
-            android:id="@+id/chart"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </com.shinobicontrols.charts.ChartView>
-        <!--<fragment-->
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1.2">
+
+
+            <com.shinobicontrols.charts.ChartView
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <!--<fragment-->
             <!--class="com.shinobicontrols.charts.ChartFragment"-->
             <!--android:id="@+id/chart"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="match_parent" />-->
 
+        </LinearLayout>
     </LinearLayout>
 
-
-</LinearLayout>
+    <include layout="@layout/progress_bar"/>
+</FrameLayout>
