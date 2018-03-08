@@ -84,6 +84,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_first_layout) {
             changeToFragment(new FXFragment(), mContext.getString(R.string.foreign_exchange));
 
+        } else if (id == R.id.calculator_layout) {
+            changeToFragment(new CalculatorFragment(), mContext.getString(R.string.calculator));
+
         } else if (id == R.id.nav_second_layout) {
             changeToFragment(new ReservesFragment(), mContext.getString(R.string.foreign_reserves));
 

@@ -1,9 +1,11 @@
 package com.girish.venecon;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.girish.venecon.api.models.ExchangeData;
+import com.girish.venecon.utils.Constants;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.shinobicontrols.charts.ChartView;
@@ -144,10 +147,13 @@ public class FXFragment extends Fragment {
 //            OfficialTV.setText(Html.fromHtml("" + numberFormat.format(GetLatestNonZeroValue(Official, DateFormat.format(new Date()))) + " <small><small><small><small>BsF/$</small></small></small></small>"));
 
         TextView DicomTV = (TextView) myView.findViewById(R.id.DicomVal);
-        DicomTV.setText(Html.fromHtml("" + numberFormat.format(GetLatestNonZeroValue(Dicom, DateFormat.format(new Date()))) + " <small><small><small><small>BsF/$</small></small></small></small>"));
+        Double dicomConversionRate = GetLatestNonZeroValue(Dicom, DateFormat.format(new Date()));
+        Double blackMarketConversionRate = GetLatestNonZeroValue(BM, DateFormat.format(new Date()));
+        saveDicomAndBlackMarket(dicomConversionRate, blackMarketConversionRate);
+        DicomTV.setText(Html.fromHtml("" + numberFormat.format(dicomConversionRate) + " <small><small><small><small>BsF/$</small></small></small></small>"));
 
         TextView BlackMarketTV = (TextView) myView.findViewById(R.id.BlackMarketVal);
-        BlackMarketTV.setText(Html.fromHtml("" + numberFormat.format(GetLatestNonZeroValue(BM, DateFormat.format(new Date()))) + " <small><small><small><small>BsF/$</small></small></small></small>"));
+        BlackMarketTV.setText(Html.fromHtml("" + numberFormat.format(blackMarketConversionRate) + " <small><small><small><small>BsF/$</small></small></small></small>"));
 
         TextView M2_ResTV = (TextView) myView.findViewById(R.id.M2_ResVal);
         M2_ResTV.setText(Html.fromHtml("" + numberFormat.format(GetLatestNonZeroValue(M2_Res, DateFormat.format(new Date()))) + " <small><small><small><small>BsF/$</small></small></small></small>"));
@@ -241,6 +247,14 @@ public class FXFragment extends Fragment {
         LinkedHashMap[] HMArray = {Official, Simadi, BM, M2_Res};
 
         populateChartWithData(HMArray, shinobiChart);
+    }
+
+    private void saveDicomAndBlackMarket(double dicomConversionRate, double blackMarketConversionRate) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat(Constants.DICOM_VALUE, (float)dicomConversionRate);
+        editor.putFloat(Constants.BLACK_MARKET_VALUE, (float)blackMarketConversionRate);
+        editor.apply();
     }
 
     private void setupXAxis(DateTimeAxis xAxis) {

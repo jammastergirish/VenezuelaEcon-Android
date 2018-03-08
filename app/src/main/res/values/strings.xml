@@ -62,4 +62,6 @@
 
     <string name="directwithopec">Direct Comm. with OPEC</string>
     <string name="secondarysources">Secondary Sources</string>
+    <string name="calculator">Calculator</string>
+    <string name="dots">...</string>
 </resources>
