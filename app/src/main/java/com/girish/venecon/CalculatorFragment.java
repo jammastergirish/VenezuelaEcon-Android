@@ -20,6 +20,9 @@ import com.girish.venecon.utils.Constants;
 
 import java.util.Locale;
 
+import belka.us.androidtoggleswitch.widgets.BaseToggleSwitch;
+import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
+
 
 /**
  * Created by girish on 02/10/2016.
@@ -35,7 +38,7 @@ public class CalculatorFragment extends Fragment {
     private static final float DEFAULT_DICOM_VALUE = 205899.46f;
     private TextView formattedValueTextView, dicomTextView, blackMarketTextView;
     private EditText valueEditText;
-    private ToggleButton toggleButton;
+    private ToggleSwitch toggleSwitch;
     private boolean fromDollarsToBsf = true;
     private double blackMarketConversionRate = DEFAULT_BLACK_MARKET_VALUE, dicomConversionRate = DEFAULT_DICOM_VALUE;
     private TextWatcher textWatcher = new TextWatcher() {
@@ -68,22 +71,22 @@ public class CalculatorFragment extends Fragment {
         blackMarketTextView = view.findViewById(R.id.blackMarketTextView);
         valueEditText = view.findViewById(R.id.valueEditText);
         valueEditText.addTextChangedListener(textWatcher);
-        toggleButton = view.findViewById(R.id.toggleButton);
-        toggleButton.setOnClickListener(new View.OnClickListener() {
+        toggleSwitch = view.findViewById(R.id.toggleSwitch);
+        toggleSwitch.setOnToggleSwitchChangeListener(new BaseToggleSwitch.OnToggleSwitchChangeListener() {
             @Override
-            public void onClick(View view) {
-                toggleConversion();
+            public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+                if(position == 0 && isChecked){
+                    fromDollarsToBsf = true;
+                } else if(position == 1 && isChecked){
+                    fromDollarsToBsf = false;
+                }
+                updateUI();
             }
         });
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         blackMarketConversionRate = sharedPreferences.getFloat(Constants.BLACK_MARKET_VALUE, DEFAULT_BLACK_MARKET_VALUE);
         dicomConversionRate = sharedPreferences.getFloat(Constants.DICOM_VALUE, DEFAULT_DICOM_VALUE);
         return view;
-    }
-
-    private void toggleConversion() {
-        fromDollarsToBsf = !fromDollarsToBsf;
-        updateUI();
     }
 
     private void updateUI() {

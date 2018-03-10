@@ -27,6 +27,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:11.6.0'
     implementation 'com.google.firebase:firebase-ads:11.6.0'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'us.belka:androidtoggleswitch:1.2.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     compile fileTree(include: ['*.jar'], dir: 'libs')

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#000000"
     android:padding="@dimen/activity_horizontal_margin">
@@ -12,6 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
             <EditText
                 android:id="@+id/valueEditText"
@@ -21,12 +24,24 @@
                 android:textSize="22sp"
                 android:inputType="number"
                 android:layout_height="wrap_content" />
-            <ToggleButton
-                android:id="@+id/toggleButton"
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOff="$"
-                android:textOn="BsF"/>
+                android:padding="1dp"
+                android:background="@drawable/white_border">
+
+                <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                    android:id="@+id/toggleSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    custom:activeBgColor="@color/white"
+                    custom:activeTextColor="@color/black"
+                    custom:inactiveBgColor="@color/black"
+                    custom:inactiveTextColor="@color/white"
+                    custom:textToggleLeft="@string/dollar_sign"
+                    custom:textToggleRight="@string/bsf"/>
+            </FrameLayout>
+
         </LinearLayout>
         <TextView
             android:id="@+id/formattedValueTextView"

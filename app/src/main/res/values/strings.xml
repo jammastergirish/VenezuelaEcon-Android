@@ -64,4 +64,6 @@
     <string name="secondarysources">Secondary Sources</string>
     <string name="calculator">Calculator</string>
     <string name="dots">...</string>
+    <string name="dollar_sign">$</string>
+    <string name="bsf">BsF</string>
 </resources>

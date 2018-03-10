@@ -121,6 +121,7 @@
     <orderEntry type="library" scope="TEST" name="com.android.support.test:exposed-instrumentation-api-publish-0.5" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-ads-11.6.0" level="project" />
     <orderEntry type="library" scope="TEST" name="com.squareup:javawriter:2.1.1@jar" level="project" />
+    <orderEntry type="library" name="us.belka:androidtoggleswitch-1.2.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-basement-license-11.6.0" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-iid-11.6.0" level="project" />
     <orderEntry type="library" name="android.arch.lifecycle:runtime-1.0.3" level="project" />
