@@ -1,55 +1,68 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AboutFragment"
     android:background="#000000">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_weight="1">
-    <TextView
-        android:layout_width="299dp"
-        android:layout_height="137dp"
-        android:textColor="#FFFFFF"
-        android:id="@+id/textView"
-        android:gravity="fill_horizontal"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/about_text" />
-
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
         android:orientation="vertical"
-        android:layout_weight="1">
-
-    <Button
-        android:text="@string/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/button" />
-
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
         <TextView
-            android:layout_width="299dp"
-            android:layout_height="137dp"
-            android:textColor="#FFFFFF"
-            android:id="@+id/textView2"
-            android:gravity="fill_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/about_page_paragraph1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:text="@string/about_page_paragraph2"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:text="@string/about_page_paragraph3"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColorLink="@color/link_orange"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
-            android:text="@string/about2_text" />
-
+            android:textSize="18sp"
+            android:autoLink="web"
+            android:text="@string/website"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColorLink="@color/link_orange"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18sp"
+            android:autoLink="email"
+            android:text="@string/email"/>
     </LinearLayout>
-</LinearLayout>
+    <LinearLayout
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Data compiled and updated live from:\n- Central Bank of Venezuela\n- Venezuela\'s Ministry of Oil and Mining\n- DolarToday\n-U.S. Energy Information Administration\n-Organization of the Petroleum Exporting Countries\n-Bitcoin Venezuela\n-Venezuela's Customs and Tax Administration\n-Ecoanalicita\n-MIT's Billion Prices project\n-Venezuela's National Assembly\n-CEDICE"/>
+        <TextView
+            android:id="@+id/versionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+</FrameLayout>

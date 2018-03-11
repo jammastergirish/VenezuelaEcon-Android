@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.google.android.gms.ads.InterstitialAd; // 20171130
 import com.google.android.gms.ads.AdRequest;
 import android.os.*;
+import android.widget.TextView;
 
 
 /**
@@ -51,8 +52,8 @@ public class AboutFragment extends Fragment {
 
 
         myView = inflater.inflate(R.layout.about_layout, container, false);
-
-        addListenerOnButton();
+        TextView versionTextView = myView.findViewById(R.id.versionTextView);
+        versionTextView.setText(getString(R.string.version, BuildConfig.VERSION_NAME));
 
         return myView;
 
@@ -60,34 +61,34 @@ public class AboutFragment extends Fragment {
     }
 
 
-    public void addListenerOnButton() {
-
-        button = (Button) myView.findViewById(R.id.button);
-
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-//                Intent browserIntent =
-//                        new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.mkyong.com"));
-//                startActivity(browserIntent);
-
-
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_SUBJECT, "");
-                intent.putExtra(Intent.EXTRA_TEXT, "");
-                intent.setData(Uri.parse("mailto:girish@girish-gupta.com"));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-
-
-            }
-
-        });
-
-    }
+//    public void addListenerOnButton() {
+//
+//        button = (Button) myView.findViewById(R.id.button);
+//
+//        button.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//
+////                Intent browserIntent =
+////                        new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.mkyong.com"));
+////                startActivity(browserIntent);
+//
+//
+//                Intent intent = new Intent(Intent.ACTION_SENDTO);
+//                intent.setType("text/plain");
+//                intent.putExtra(Intent.EXTRA_SUBJECT, "");
+//                intent.putExtra(Intent.EXTRA_TEXT, "");
+//                intent.setData(Uri.parse("mailto:girish@girish-gupta.com"));
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
+//
+//
+//            }
+//
+//        });
+//
+//    }
 
 
 

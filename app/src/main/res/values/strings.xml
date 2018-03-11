@@ -49,7 +49,7 @@
 
     <string name="about">About</string>
     <string name="about_text">This app was created by Girish Gupta, a Caracas-based journalist. In real time, data from various sources is compiled into an online database from which your device pulls data. Notifications are fully automated and so very fast and accurate.</string>
-    <string name="about2_text">Data compiled and updated live from:\n\n- Central Bank of Venezuela\n- Venezuela\'s Ministry of Oil and Mining\n- DolarToday\n-U.S. Energy Information Administration\n-Organization of the Petroleum Exporting Countries</string>
+    <string name="about2_text">Data compiled and updated live from:\n- Central Bank of Venezuela\n- Venezuela\'s Ministry of Oil and Mining\n- DolarToday\n-U.S. Energy Information Administration\n-Organization of the Petroleum Exporting Countries\n-Bitcoin Venezuela\n-Venezuela's Customs and Tax Administration\n-Ecoanalicita\n-MIT's Billion Prices project\n-Venezuela's National Assembly\n-CEDICE</string>
     <string name="button">Send comments...</string>
 
     <string name="barrel">barrel</string>
@@ -66,4 +66,10 @@
     <string name="dots">...</string>
     <string name="dollar_sign">$</string>
     <string name="bsf">BsF</string>
+    <string name="about_page_paragraph1">Venezuela Econ is the data platform to help researchers, traders, analysts and anyone with an interest in the world\'s worst economy.</string>
+    <string name="about_page_paragraph2">Users can witness the collapse of the currency, soaring money supply and falling wages in real time - as well as historic data going back nearly half a century.</string>
+    <string name="about_page_paragraph3">The website contains even more features, such as the ability to create custom graphs, a flight tracker and social indicators such as murder rates.</string>
+    <string name="website">www.venezuelaecon.com</string>
+    <string name="email">info@venezuelaecon.com</string>
+    <string name="version">Version %1s on Android</string>
 </resources>
