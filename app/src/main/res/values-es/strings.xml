@@ -48,7 +48,7 @@
     <string name="imports_from_venezuela">EE.UU. Importaciones desde Venezuela</string>
 
     <string name="about">Información</string>
-    <string name="calculator">Calculadora</string>
+    <string name="calculator">☻ Calculadora</string>
     <string name="about_text">Esta aplicación fue creada por Girish Gupta, un periodista en Caracas. En tiempo real, datos de diversas fuentes se compilan en una base de datos en línea a partir del cual su dispositivo toma los datos.</string>
     <string name="about2_text">Los datos están compilados e actualizados en vivo desde:\n\n- Banco Central de Venezuela\n- Ministerio de Petróleo y Minería\n- DolarToday\n-Administración de Información de Energía\n-Organización de Países Exportadores de Petróleo</string>
     <string name="button">Enviar comentarios...</string>
