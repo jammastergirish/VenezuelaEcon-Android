@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -79,6 +80,7 @@ public class InflationFragment extends Fragment {
 
         chartView = myView.findViewById(R.id.Chart);
         shinobiChart = chartView.getShinobiChart();
+        final LinearLayout topBannerLayout = myView.findViewById(R.id.topBannerLayout);
         Utils.setShinobiChartBackground(shinobiChart);
 
         final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
@@ -93,7 +95,7 @@ public class InflationFragment extends Fragment {
 
             @Override
             public void onFailure(String message) {
-                Utils.handleError(getActivity(), message);
+                Utils.handleError(getActivity(), message, topBannerLayout);
                 progressBar.setVisibility(View.GONE);
             }
         });

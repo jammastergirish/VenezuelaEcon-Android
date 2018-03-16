@@ -11,4 +11,5 @@ public class Constants {
     public static final double US_OIL_DIVIDER = 1000.0;
     public static final String DICOM_VALUE = "DICOM";
     public static final String BLACK_MARKET_VALUE = "BLACK_MARKET";
+    public static final long ERROR_DURATION = 3000;
 }

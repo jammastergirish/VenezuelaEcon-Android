@@ -9,6 +9,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -84,6 +85,7 @@ public class MinWageFragment extends Fragment {
 
         chartView = myView.findViewById(R.id.Chart);
         shinobiChart = chartView.getShinobiChart();
+        final LinearLayout topBannerLayout = myView.findViewById(R.id.topBannerLayout);
         Utils.setShinobiChartBackground(shinobiChart);
 
         final ProgressBar progressBar = myView.findViewById(R.id.progressBar);
@@ -98,7 +100,7 @@ public class MinWageFragment extends Fragment {
 
             @Override
             public void onFailure(String message) {
-                Utils.handleError(getActivity(), message);
+                Utils.handleError(getActivity(), message, topBannerLayout);
                 progressBar.setVisibility(View.GONE);
             }
         });

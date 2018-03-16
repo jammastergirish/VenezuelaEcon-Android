@@ -11,6 +11,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -58,7 +59,6 @@ public class FXFragment extends Fragment {
     private ChartView chartView;
     private ShinobiChart shinobiChart;
 
-
     public FXFragment() {
 
         GregorianCalendar calendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
@@ -94,6 +94,7 @@ public class FXFragment extends Fragment {
 
         chartView = myView.findViewById(R.id.chart);
         shinobiChart = chartView.getShinobiChart();
+        final LinearLayout topBannerLayout = myView.findViewById(R.id.topBannerLayout);
         Utils.setShinobiChartBackground(shinobiChart);
         progressBar.setVisibility(View.VISIBLE);
         networkHelper.getExchangeDataRetrofit(new NetworkHelper.OnDataCallback<List<ExchangeData>>() {
@@ -108,7 +109,7 @@ public class FXFragment extends Fragment {
                 // TODO Figure out how to handle errors! We will want this to be in Utils or somewhere,
                 // Cause it's always gonna be the same I'd say. I will leave this empty for now,
                 // When you figure out how you wanna do it, we'll finish the method
-                Utils.handleError(getActivity(), message);
+                Utils.handleError(getActivity(), message, topBannerLayout);
                 progressBar.setVisibility(View.GONE);
             }
         });
