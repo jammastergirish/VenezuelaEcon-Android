@@ -3,6 +3,16 @@
 
     <item
         is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/androidtoggleswitch-1.2.2.aar/b0b0b8c7b8dbd36eca52ba298b7ac2f0/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="d4c1ad9944b7d778a38db6d1d4ef303536643975">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/56.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/shinobicontrols-android-charts-premium-java-1.9.0-3.aar/7f04fa62c15201ed8ccf373a4d943c20/jars/classes.jar"
         jumboMode="false"
         min-sdk-version="16"

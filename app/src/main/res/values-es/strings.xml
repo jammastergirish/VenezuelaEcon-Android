@@ -48,6 +48,7 @@
     <string name="imports_from_venezuela">EE.UU. Importaciones desde Venezuela</string>
 
     <string name="about">Información</string>
+    <string name="calculator">☻ Calculadora</string>
     <string name="about_text">Esta aplicación fue creada por Girish Gupta, un periodista en Caracas. En tiempo real, datos de diversas fuentes se compilan en una base de datos en línea a partir del cual su dispositivo toma los datos.</string>
     <string name="about2_text">Los datos están compilados e actualizados en vivo desde:\n\n- Banco Central de Venezuela\n- Ministerio de Petróleo y Minería\n- DolarToday\n-Administración de Información de Energía\n-Organización de Países Exportadores de Petróleo</string>
     <string name="button">Enviar comentarios...</string>
@@ -62,4 +63,14 @@
 
     <string name="directwithopec">Com. Directa con OPEP</string>
     <string name="secondarysources">Fuentes Secundarias</string>
+
+    <string name="dots">...</string>
+    <string name="dollar_sign">$</string>
+    <string name="bsf">BsF</string>
+    <string name="about_page_paragraph1">Venezuela Econ is the data platform to help researchers, traders, analysts and anyone with an interest in the world\'s worst economy.</string>
+    <string name="about_page_paragraph2">Users can witness the collapse of the currency, soaring money supply and falling wages in real time - as well as historic data going back nearly half a century.</string>
+    <string name="about_page_paragraph3">The website contains even more features, such as the ability to create custom graphs, a flight tracker and social indicators such as murder rates.</string>
+    <string name="website">www.venezuelaecon.com</string>
+    <string name="email">info@venezuelaecon.com</string>
+    <string name="version">Version %1s on Android</string>
 </resources>

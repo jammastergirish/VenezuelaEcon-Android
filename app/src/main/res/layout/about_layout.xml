@@ -52,11 +52,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Data compiled and updated live from:\n- Central Bank of Venezuela\n- Venezuela\'s Ministry of Oil and Mining\n- DolarToday\n-U.S. Energy Information Administration\n-Organization of the Petroleum Exporting Countries\n-Bitcoin Venezuela\n-Venezuela's Customs and Tax Administration\n-Ecoanalicita\n-MIT's Billion Prices project\n-Venezuela's National Assembly\n-CEDICE"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:text="Data compiled and updated live from:\n- Central Bank of Venezuela\n- Venezuela\'s Ministry of Oil and Mining\n- DolarToday\n-U.S. Energy Information Administration\n-Organization of the Petroleum Exporting Countries\n-Bitcoin Venezuela\n-Venezuela's Customs and Tax Administration\n-Ecoanalicita\n-MIT's Billion Prices project\n-Venezuela's National Assembly\n-CEDICE"/>-->
         <TextView
             android:id="@+id/versionTextView"
             android:layout_width="wrap_content"
