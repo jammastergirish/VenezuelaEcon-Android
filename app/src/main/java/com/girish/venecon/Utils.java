@@ -3,9 +3,15 @@ package com.girish.venecon;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
 import android.text.Html;
+import android.view.View;
 import android.widget.TextView;
 
+import com.girish.venecon.utils.Constants;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.shinobicontrols.charts.ShinobiChart;
 
 import java.text.DecimalFormat;
@@ -236,7 +242,22 @@ public class Utils {
 
 
     public static void handleError(Context context, String message) {
-        // TODO figure out how to display an error. I presume we're gonna need Context too, to display a Toast, or a Dialog, or anything really
+
+    }
+
+    public static void handleError(Context context, String message, View view) {
+        displayTopBanner(message, view);
+    }
+
+    private static void displayTopBanner(String message, final View view) {
+        view.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                view.setVisibility(View.GONE);
+            }
+        }, Constants.ERROR_DURATION);
+
     }
 
     public static void setShinobiChartBackground(ShinobiChart shinobiChart) {
@@ -244,5 +265,27 @@ public class Utils {
         shinobiChart.getStyle().setBackgroundColor(blackColor);
         shinobiChart.getStyle().setCanvasBackgroundColor(blackColor);
         shinobiChart.getStyle().setPlotAreaBackgroundColor(blackColor);
+    }
+
+    public static void loadIntersitialAd(Context context){
+        final InterstitialAd mInterstitialAd = new InterstitialAd(context);
+        mInterstitialAd.setAdUnitId(Constants.AD_UNIT_ID);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+            }
+        }, 5000);
+    }
+
+    public static void loadBannerAd(AdView adView){
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
     }
 }

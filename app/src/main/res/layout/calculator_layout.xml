@@ -1,25 +1,89 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalculatorFragment">
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="@dimen/activity_horizontal_margin">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/valueEditText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:inputType="number"
+                android:layout_height="wrap_content" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="1dp"
+                android:background="@drawable/white_border">
 
+                <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                    android:id="@+id/toggleSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    custom:activeBgColor="@color/white"
+                    custom:activeTextColor="@color/black"
+                    custom:inactiveBgColor="@color/black"
+                    custom:inactiveTextColor="@color/white"
+                    custom:textToggleLeft="@string/dollar_sign"
+                    custom:textToggleRight="@string/bsf"/>
+            </FrameLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
+        </LinearLayout>
+        <TextView
+            android:id="@+id/formattedValueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="50dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:text="@string/blackmarkettextview"/>
+            <TextView
+                android:id="@+id/blackMarketTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:text="@string/dots"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:text="@string/dicomtextview"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/dicomTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:text="@string/dots"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <include
+        layout="@layout/banner_ad_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:text="XXX"
-        android:ems="10"
-        android:id="@+id/InputNumber" />
-
-
-
-    <TextView
-        android:text="YYY"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/InputView" />
-
-</LinearLayout>
+        android:layout_gravity="bottom"/>
+</FrameLayout>

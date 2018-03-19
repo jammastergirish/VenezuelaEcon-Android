@@ -9,4 +9,9 @@ public class Constants {
     public static final double INFLATION_DIVIDER = 100.0;
     public static final double CRUDE_DIVIDER = 1000.0;
     public static final double US_OIL_DIVIDER = 1000.0;
+    public static final String DICOM_VALUE = "DICOM";
+    public static final String BLACK_MARKET_VALUE = "BLACK_MARKET";
+    public static final long ERROR_DURATION = 3000;
+    public static final String AD_UNIT_ID = "ca-app-pub-7175811277195688/6615701473";
+    public static final String ADMOB_APP_ID = "ca-app-pub-7175811277195688~1778307767";
 }

@@ -12,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.girish.venecon.utils.Constants;
+import com.google.android.gms.ads.MobileAds;
+
 import static com.girish.venecon.Utils.mContext;
 //import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         changeToFragment(new FXFragment(), mContext.getString(R.string.foreign_exchange));
-
+        MobileAds.initialize(this, Constants.ADMOB_APP_ID);
 
     }
 
@@ -84,12 +87,15 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_first_layout) {
             changeToFragment(new FXFragment(), mContext.getString(R.string.foreign_exchange));
 
+        } else if (id == R.id.calculator_layout) {
+            changeToFragment(new CalculatorFragment(), mContext.getString(R.string.calculator));
+
         } else if (id == R.id.nav_second_layout) {
             changeToFragment(new ReservesFragment(), mContext.getString(R.string.foreign_reserves));
-
+        }
 //        } else if (id == R.id.bitcoin) {
 //            changeToFragment(new BitcoinFragment(), "Bitcoin");
-        }
+//        }
         else if (id == R.id.m2) {
             changeToFragment(new M2Fragment(), mContext.getString(R.string.money_supply));
         }
