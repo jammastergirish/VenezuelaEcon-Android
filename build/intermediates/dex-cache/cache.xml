@@ -3,6 +3,36 @@
 
     <item
         is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/firebase-common-11.8.0.aar/2a380175e158510bc55416db72fece33/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="e6aeff19a2ce1eb896557be73cb9ceb56f8d1cf3">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/75.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.8.0.aar/6f75ece762479a693e1e463ad4042542/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="c44026185adf61f12630db36ac6781481f559e7c">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/69.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.8.0.aar/4c867efd7e23d425106c4048012537e0/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="264ad23f9752aabecfa41115c52a25a023a08839">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/74.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/androidtoggleswitch-1.2.2.aar/b0b0b8c7b8dbd36eca52ba298b7ac2f0/jars/classes.jar"
         jumboMode="false"
         min-sdk-version="16"
@@ -13,6 +43,36 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/play-services-ads-11.8.0.aar/a3040be6abc82e130c96a6cccb7a5548/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="aeca0a0ab86831ec59a54723205ce9341ac22d1b">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/76.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/play-services-gass-11.8.0.aar/2626e8839ab64038d94d53ceee3db4d1/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="a7760a45a6c9f425aaa43ef391a8cf28a8bcb4a1">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/79.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/5fdf05e3e1b6ba753d66c1b0c8cf82db/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="5ad3911825107d8dd4b017fdecebfd23c08048dd">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/80.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/shinobicontrols-android-charts-premium-java-1.9.0-3.aar/7f04fa62c15201ed8ccf373a4d943c20/jars/classes.jar"
         jumboMode="false"
         min-sdk-version="16"
@@ -20,6 +80,46 @@
         revision="27.0.1"
         sha1="e0de053435bb93b200c8ab7df0ed68c6895ebf91">
         <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/46.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.8.0.aar/a33d629dbe428fd74c9a3c6cf9e3ef52/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="122de0d704f76d2bb5cb9db66e00fe90a0a41e78">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/73.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.8.0.aar/79dabf5961d2be9bb1c743d34b66c161/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="d2af2ef4d987d753f2e8ee2d1480ab964d5c7273">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/77.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.8.0.aar/80aef4d3d30843daa5635bb6e72dda31/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="42c9659c973e311ffdb645ed057e5053e0ab5c78">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/72.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/girish/.gradle/caches/transforms-1/files-1.1/play-services-ads-lite-11.8.0.aar/bf44b52945e7da53853cd34ef9cc1bd8/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="16"
+        optimize="true"
+        revision="27.0.1"
+        sha1="24cb9bae5fbe94df0f55d87452a291b69a2f22bf">
+        <dex dex="/Users/girish/Documents/Coding/Android/VenezuelaEcon/app/build/intermediates/transforms/preDex/release/78.jar" />
     </item>
 
 </items>

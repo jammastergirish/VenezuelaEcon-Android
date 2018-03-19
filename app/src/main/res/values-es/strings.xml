@@ -73,4 +73,6 @@
     <string name="website">www.venezuelaecon.com</string>
     <string name="email">info@venezuelaecon.com</string>
     <string name="version">Version %1s on Android</string>
+    <string name="please_check_your_internet_connection">Por favor revise su conexion a internet.</string>
+    <string name="banner_ad_unit_id">ca-app-pub-7175811277195688/2193654707</string>
 </resources>

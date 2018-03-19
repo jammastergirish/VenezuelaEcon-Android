@@ -8,8 +8,8 @@ android {
         applicationId 'com.girish.venecon'
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 16
-        versionName "1.9.7"
+        versionCode 17
+        versionName "1.9.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
