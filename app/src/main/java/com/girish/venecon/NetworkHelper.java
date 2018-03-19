@@ -1,7 +1,5 @@
 package com.girish.venecon;
 
-import android.util.Log;
-
 import com.girish.venecon.api.ApiService;
 import com.girish.venecon.api.models.BitcoinData;
 import com.girish.venecon.api.models.CrudeProductionData;
@@ -35,7 +33,7 @@ public class NetworkHelper {
 
     private final Retrofit retrofit;
 
-    public NetworkHelper(){
+    public NetworkHelper() {
         // This is the interceptor that logs all the requests
         // Keep in mind there's different interceptors we can add,
         // A good example is unauthorized interceptor, that checks each response
@@ -44,9 +42,9 @@ public class NetworkHelper {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS);
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS);
         httpClient.addInterceptor(logging);
 
         retrofit = new Retrofit.Builder()
@@ -56,55 +54,55 @@ public class NetworkHelper {
                 .build();
     }
 
-    public void getExchangeDataRetrofit(final OnDataCallback<List<ExchangeData>> onDataCallback){
+    public void getExchangeDataRetrofit(final OnDataCallback<List<ExchangeData>> onDataCallback) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<ExchangeData>> call = apiService.getExchangeData();
         processCall(call, onDataCallback);
     }
 
-    public void getReservesDataRetrofit(final OnDataCallback<List<ReserveData>> onDataCallback){
+    public void getReservesDataRetrofit(final OnDataCallback<List<ReserveData>> onDataCallback) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<ReserveData>> call = apiService.getReserveData();
         processCall(call, onDataCallback);
     }
 
-    public void getM2DataRetrofit(final OnDataCallback<List<M2Data>> onDataCallback){
+    public void getM2DataRetrofit(final OnDataCallback<List<M2Data>> onDataCallback) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<M2Data>> call = apiService.getM2Data();
         processCall(call, onDataCallback);
     }
 
-    public void getBitcoinDataRetrofit(final OnDataCallback<List<BitcoinData>> onDataCallback){
+    public void getBitcoinDataRetrofit(final OnDataCallback<List<BitcoinData>> onDataCallback) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<BitcoinData>> call = apiService.getBitcoinData();
         processCall(call, onDataCallback);
     }
 
-    public void getOilDataRetrofit(final OnDataCallback<List<OilData>> onDataCallback){
+    public void getOilDataRetrofit(final OnDataCallback<List<OilData>> onDataCallback) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<OilData>> call = apiService.getOilData();
         processCall(call, onDataCallback);
     }
 
-    public void getMwDataRetrofit(final OnDataCallback<List<MWData>> onDataCallback){
+    public void getMwDataRetrofit(final OnDataCallback<List<MWData>> onDataCallback) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<MWData>> call = apiService.getMwData();
         processCall(call, onDataCallback);
     }
 
-    public void getInflationDataRetrofit(final OnDataCallback<List<InflationData>> onDataCallback){
+    public void getInflationDataRetrofit(final OnDataCallback<List<InflationData>> onDataCallback) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<InflationData>> call = apiService.getInflationData();
         processCall(call, onDataCallback);
     }
 
-    public void getCrudeProductionDataRetrofit(final OnDataCallback<List<CrudeProductionData>> onDataCallback){
+    public void getCrudeProductionDataRetrofit(final OnDataCallback<List<CrudeProductionData>> onDataCallback) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<CrudeProductionData>> call = apiService.getCrudeProductionData();
         processCall(call, onDataCallback);
     }
 
-    public void getUsOilDataRetrofit(final OnDataCallback<List<UsOilData>> onDataCallback){
+    public void getUsOilDataRetrofit(final OnDataCallback<List<UsOilData>> onDataCallback) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<UsOilData>> call = apiService.getUsOilData();
         processCall(call, onDataCallback);
@@ -117,7 +115,7 @@ public class NetworkHelper {
         call.enqueue(new Callback<T>() {
             @Override
             public void onResponse(Call<T> call, retrofit2.Response<T> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     onDataCallback.onSuccess(response.body());
                 } else {
                     onDataCallback.onFailure(response.message());
@@ -131,66 +129,12 @@ public class NetworkHelper {
         });
     }
 
-    public String getHTTP(String url) {
-        OkHttpClient client = new OkHttpClient();
-
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-
-            return response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public String getExchangeData(){
-        return getHTTP("https://api.venezuelaecon.com/output.php?table=ve_fx&format=json&start=2010-01-01&key=dsCHiQDZc2HvYFNYrQrMhQOczHUDHAUSHD8"); // 20161014 When I change this to 2012 it doesn't work!
-    }
-
-    public String getReservesData(){
-        return getHTTP("https://api.venezuelaecon.com/output.php?table=ve_res&format=json&start=2010-10-01&key=dsCHiQDZc2HvYFNYrQrMhQOczHUDHAUSHD8"); // added this key on 20171110
-    }
-
-    public String getM2Data(){
-        return getHTTP("https://api.venezuelaecon.com/output.php?table=ve_m2&format=json&start=2010-01-01&key=dsCHiQDZc2HvYFNYrQrMhQOczHUDHAUSHD8");
-    }
-
-    public String getBitcoinData(){
-        return getHTTP("https://api.venezuelaecon.com/output.php?table=ve_fx&format=json&start=2010-01-01&key=dsCHiQDZc2HvYFNYrQrMhQOczHUDHAUSHD8");
-    }
-
-    public String getOilData(){
-        return getHTTP("https://api.venezuelaecon.com/output.php?table=ve_oil&format=json&start=2010-01-01&key=dsCHiQDZc2HvYFNYrQrMhQOczHUDHAUSHD8");
-    }
-
-    public String getMWData(){
-        return getHTTP("https://api.venezuelaecon.com/output.php?table=ve_mw&format=json&start=2010-01-01&key=dsCHiQDZc2HvYFNYrQrMhQOczHUDHAUSHD8");
-    }
-
-    public String getInflationData(){
-        return getHTTP("https://api.venezuelaecon.com/output.php?table=ve_inf2&format=json&start=2008-01-01&key=dsCHiQDZc2HvYFNYrQrMhQOczHUDHAUSHD8");
-    }
-
-    public String getCrudeProductionData(){
-        return getHTTP("https://api.venezuelaecon.com/output.php?table=ve_crudeproduction&format=json&start=2002-01-01&key=dsCHiQDZc2HvYFNYrQrMhQOczHUDHAUSHD8");
-    }
-
-    public String getUSOilData(){
-        return getHTTP("https://api.venezuelaecon.com/output.php?table=ve_US&format=json&start=2002-01-01&key=dsCHiQDZc2HvYFNYrQrMhQOczHUDHAUSHD8");
-    }
-
-
     // Very nice concept, generic interface, we use any type T that can be a custom object, a List<SomeClass> etc,
     // 1 interface for all callbacks. You'll see it's usage everywhere. Before I learned this, I created a separate
     // interface for each different response, making it take a parameter of response model class. This is way better
-    public interface OnDataCallback<T>{
+    public interface OnDataCallback<T> {
         void onSuccess(T data);
+
         void onFailure(String message);
     }
 }

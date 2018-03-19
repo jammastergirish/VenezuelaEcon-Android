@@ -8,7 +8,10 @@
     <LinearLayout
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:orientation="vertical"
+        android:animateLayoutChanges="true"
         android:background="#000000">
+        <include layout="@layout/top_banner"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -176,9 +179,11 @@
             <com.shinobicontrols.charts.ChartView
                 android:id="@+id/Chart"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></com.shinobicontrols.charts.ChartView>
+                android:layout_height="match_parent" />
 
         </LinearLayout>
+
+        <include layout="@layout/banner_ad_layout" />
     </LinearLayout>
     <include layout="@layout/progress_bar"/>
 </FrameLayout>

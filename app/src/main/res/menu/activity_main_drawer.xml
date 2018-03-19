@@ -5,6 +5,9 @@
         <item
             android:id="@+id/nav_first_layout"
             android:title="@string/foreign_exchange" />
+        <item
+            android:id="@+id/calculator_layout"
+            android:title="@string/calculator" />
         <!--<item-->
             <!--android:id="@+id/bitcoin"-->
             <!--android:title="Bitcoin" />-->

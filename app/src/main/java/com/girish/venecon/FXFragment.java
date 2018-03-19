@@ -1,20 +1,23 @@
 package com.girish.venecon;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.girish.venecon.api.models.ExchangeData;
+import com.girish.venecon.utils.Constants;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.AdView;
 import com.shinobicontrols.charts.ChartView;
 import com.shinobicontrols.charts.DataAdapter;
 import com.shinobicontrols.charts.DataPoint;
@@ -55,7 +58,6 @@ public class FXFragment extends Fragment {
     private ChartView chartView;
     private ShinobiChart shinobiChart;
 
-
     public FXFragment() {
 
         GregorianCalendar calendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
@@ -71,19 +73,7 @@ public class FXFragment extends Fragment {
         myView = inflater.inflate(R.layout.fx_layout, container, false);
 
         //https://developers.google.com/admob/android/interstitial 20171129
-        final InterstitialAd mInterstitialAd = new InterstitialAd(getActivity()); // https://stackoverflow.com/questions/37685388/getting-an-interstitial-ad-to-display-from-a-fragment
-        mInterstitialAd.setAdUnitId("ca-app-pub-7175811277195688/6615701473");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-        new Handler().postDelayed(new Runnable() { //https://stackoverflow.com/questions/17121248/missing-the-android-os-handler-object-from-android-studio https://stackoverflow.com/questions/31041884/execute-function-after-5-seconds-in-android
-            @Override
-            public void run() {
-                //Crashlytics.getInstance().crash(); // Force a crash
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                }
-            }
-        }, 5000);
+        initializeAds();
 
         NetworkHelper networkHelper = new NetworkHelper();
 
@@ -91,6 +81,7 @@ public class FXFragment extends Fragment {
 
         chartView = myView.findViewById(R.id.chart);
         shinobiChart = chartView.getShinobiChart();
+        final LinearLayout topBannerLayout = myView.findViewById(R.id.topBannerLayout);
         Utils.setShinobiChartBackground(shinobiChart);
         progressBar.setVisibility(View.VISIBLE);
         networkHelper.getExchangeDataRetrofit(new NetworkHelper.OnDataCallback<List<ExchangeData>>() {
@@ -105,12 +96,18 @@ public class FXFragment extends Fragment {
                 // TODO Figure out how to handle errors! We will want this to be in Utils or somewhere,
                 // Cause it's always gonna be the same I'd say. I will leave this empty for now,
                 // When you figure out how you wanna do it, we'll finish the method
-                Utils.handleError(getActivity(), message);
+                Utils.handleError(getActivity(), message, topBannerLayout);
                 progressBar.setVisibility(View.GONE);
             }
         });
 
         return myView;
+    }
+
+    private void initializeAds() {
+        Utils.loadIntersitialAd(getActivity());
+        AdView adView = myView.findViewById(R.id.adView);
+        Utils.loadBannerAd(adView);
     }
 
     private void fillUI(List<ExchangeData> dataList) {
@@ -144,10 +141,13 @@ public class FXFragment extends Fragment {
 //            OfficialTV.setText(Html.fromHtml("" + numberFormat.format(GetLatestNonZeroValue(Official, DateFormat.format(new Date()))) + " <small><small><small><small>BsF/$</small></small></small></small>"));
 
         TextView DicomTV = (TextView) myView.findViewById(R.id.DicomVal);
-        DicomTV.setText(Html.fromHtml("" + numberFormat.format(GetLatestNonZeroValue(Dicom, DateFormat.format(new Date()))) + " <small><small><small><small>BsF/$</small></small></small></small>"));
+        Double dicomConversionRate = GetLatestNonZeroValue(Dicom, DateFormat.format(new Date()));
+        Double blackMarketConversionRate = GetLatestNonZeroValue(BM, DateFormat.format(new Date()));
+        saveDicomAndBlackMarket(dicomConversionRate, blackMarketConversionRate);
+        DicomTV.setText(Html.fromHtml("" + numberFormat.format(dicomConversionRate) + " <small><small><small><small>BsF/$</small></small></small></small>"));
 
         TextView BlackMarketTV = (TextView) myView.findViewById(R.id.BlackMarketVal);
-        BlackMarketTV.setText(Html.fromHtml("" + numberFormat.format(GetLatestNonZeroValue(BM, DateFormat.format(new Date()))) + " <small><small><small><small>BsF/$</small></small></small></small>"));
+        BlackMarketTV.setText(Html.fromHtml("" + numberFormat.format(blackMarketConversionRate) + " <small><small><small><small>BsF/$</small></small></small></small>"));
 
         TextView M2_ResTV = (TextView) myView.findViewById(R.id.M2_ResVal);
         M2_ResTV.setText(Html.fromHtml("" + numberFormat.format(GetLatestNonZeroValue(M2_Res, DateFormat.format(new Date()))) + " <small><small><small><small>BsF/$</small></small></small></small>"));
@@ -241,6 +241,14 @@ public class FXFragment extends Fragment {
         LinkedHashMap[] HMArray = {Official, Simadi, BM, M2_Res};
 
         populateChartWithData(HMArray, shinobiChart);
+    }
+
+    private void saveDicomAndBlackMarket(double dicomConversionRate, double blackMarketConversionRate) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat(Constants.DICOM_VALUE, (float)dicomConversionRate);
+        editor.putFloat(Constants.BLACK_MARKET_VALUE, (float)blackMarketConversionRate);
+        editor.apply();
     }
 
     private void setupXAxis(DateTimeAxis xAxis) {
