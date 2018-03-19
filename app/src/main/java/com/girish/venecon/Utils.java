@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.girish.venecon.utils.Constants;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.shinobicontrols.charts.ShinobiChart;
 
 import java.text.DecimalFormat;
@@ -262,5 +265,27 @@ public class Utils {
         shinobiChart.getStyle().setBackgroundColor(blackColor);
         shinobiChart.getStyle().setCanvasBackgroundColor(blackColor);
         shinobiChart.getStyle().setPlotAreaBackgroundColor(blackColor);
+    }
+
+    public static void loadIntersitialAd(Context context){
+        final InterstitialAd mInterstitialAd = new InterstitialAd(context);
+        mInterstitialAd.setAdUnitId(Constants.AD_UNIT_ID);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+            }
+        }, 5000);
+    }
+
+    public static void loadBannerAd(AdView adView){
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
     }
 }

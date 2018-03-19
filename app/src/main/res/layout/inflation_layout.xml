@@ -253,8 +253,7 @@
             </com.shinobicontrols.charts.ChartView>
 
         </LinearLayout>
-
-
+        <include layout="@layout/banner_ad_layout" />
     </LinearLayout>
     <include layout="@layout/progress_bar"/>
 </FrameLayout>

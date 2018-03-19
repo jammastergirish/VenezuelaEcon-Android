@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.girish.venecon.api.models.ExchangeData;
 import com.girish.venecon.api.models.ReserveData;
 import com.girish.venecon.utils.Constants;
+import com.google.android.gms.ads.AdView;
 import com.shinobicontrols.charts.ChartView;
 import com.shinobicontrols.charts.DataAdapter;
 import com.shinobicontrols.charts.DataPoint;
@@ -77,21 +78,7 @@ public class ReservesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.reserves_layout, container, false);
 
-
-
-        //https://developers.google.com/admob/android/interstitial 20171130
-        final InterstitialAd mInterstitialAd = new InterstitialAd(getActivity()); // https://stackoverflow.com/questions/37685388/getting-an-interstitial-ad-to-display-from-a-fragment
-        mInterstitialAd.setAdUnitId("ca-app-pub-7175811277195688/6615701473");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-        new Handler().postDelayed(new Runnable() { //https://stackoverflow.com/questions/17121248/missing-the-android-os-handler-object-from-android-studio https://stackoverflow.com/questions/31041884/execute-function-after-5-seconds-in-android
-            @Override
-            public void run() {
-                if (mInterstitialAd.isLoaded()) {
-//                    mInterstitialAd.show();
-                }
-            }
-        }, 5000);
+        initializeAds();
 
         chartView = myView.findViewById(R.id.Chart);
         shinobiChart = chartView.getShinobiChart();
@@ -116,6 +103,12 @@ public class ReservesFragment extends Fragment {
         });
 
         return myView;
+    }
+
+    private void initializeAds() {
+        Utils.loadIntersitialAd(getActivity());
+        AdView adView = myView.findViewById(R.id.adView);
+        Utils.loadBannerAd(adView);
     }
 
     private void fillUI(List<ReserveData> dataList) {

@@ -80,4 +80,10 @@
                 android:text="@string/dots"/>
         </LinearLayout>
     </LinearLayout>
+
+    <include
+        layout="@layout/banner_ad_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"/>
 </FrameLayout>

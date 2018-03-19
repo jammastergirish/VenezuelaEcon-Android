@@ -94,6 +94,8 @@
                 android:layout_height="match_parent" />
 
         </LinearLayout>
+
+        <include layout="@layout/banner_ad_layout" />
     </LinearLayout>
     <include layout="@layout/progress_bar"/>
 </FrameLayout>

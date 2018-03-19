@@ -23,9 +23,9 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.firebase:firebase-core:11.6.0'
-    implementation 'com.google.firebase:firebase-messaging:11.6.0'
-    implementation 'com.google.firebase:firebase-ads:11.6.0'
+    implementation 'com.google.firebase:firebase-core:11.8.0'
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
+    implementation 'com.google.firebase:firebase-ads:11.8.0'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'us.belka:androidtoggleswitch:1.2.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -39,7 +39,7 @@ dependencies {
     compile 'com.android.support:design:27.0.2'
     compile 'com.android.support:support-v4:27.0.2'
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
-    compile 'com.google.firebase:firebase-core:11.6.0'
+    compile 'com.google.firebase:firebase-core:11.8.0'
     testCompile 'junit:junit:4.12'
     compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') { //https://firebase.google.com/docs/crashlytics/get-started?authuser=0
         transitive = true

@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.girish.venecon.utils.Constants;
+import com.google.android.gms.ads.AdView;
 
 import java.util.Locale;
 
@@ -57,6 +59,7 @@ public class CalculatorFragment extends Fragment {
 
         }
     };
+    private View myView;
 
     public CalculatorFragment() {
 
@@ -65,13 +68,13 @@ public class CalculatorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.calculator_layout, container, false);
-        formattedValueTextView = view.findViewById(R.id.formattedValueTextView);
-        dicomTextView = view.findViewById(R.id.dicomTextView);
-        blackMarketTextView = view.findViewById(R.id.blackMarketTextView);
-        valueEditText = view.findViewById(R.id.valueEditText);
+        myView = inflater.inflate(R.layout.calculator_layout, container, false);
+        formattedValueTextView = myView.findViewById(R.id.formattedValueTextView);
+        dicomTextView = myView.findViewById(R.id.dicomTextView);
+        blackMarketTextView = myView.findViewById(R.id.blackMarketTextView);
+        valueEditText = myView.findViewById(R.id.valueEditText);
         valueEditText.addTextChangedListener(textWatcher);
-        toggleSwitch = view.findViewById(R.id.toggleSwitch);
+        toggleSwitch = myView.findViewById(R.id.toggleSwitch);
         toggleSwitch.setOnToggleSwitchChangeListener(new BaseToggleSwitch.OnToggleSwitchChangeListener() {
             @Override
             public void onToggleSwitchChangeListener(int position, boolean isChecked) {
@@ -83,10 +86,23 @@ public class CalculatorFragment extends Fragment {
                 updateUI();
             }
         });
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        blackMarketConversionRate = sharedPreferences.getFloat(Constants.BLACK_MARKET_VALUE, DEFAULT_BLACK_MARKET_VALUE);
-        dicomConversionRate = sharedPreferences.getFloat(Constants.DICOM_VALUE, DEFAULT_DICOM_VALUE);
-        return view;
+
+        initializeAds();
+
+        try {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            blackMarketConversionRate = sharedPreferences.getFloat(Constants.BLACK_MARKET_VALUE, DEFAULT_BLACK_MARKET_VALUE);
+            dicomConversionRate = sharedPreferences.getFloat(Constants.DICOM_VALUE, DEFAULT_DICOM_VALUE);
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        return myView;
+    }
+
+    private void initializeAds() {
+        Utils.loadIntersitialAd(getActivity());
+        AdView adView = myView.findViewById(R.id.adView);
+        Utils.loadBannerAd(adView);
     }
 
     private void updateUI() {
