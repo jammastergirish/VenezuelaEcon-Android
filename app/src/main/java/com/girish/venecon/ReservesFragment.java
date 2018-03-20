@@ -106,7 +106,7 @@ public class ReservesFragment extends Fragment {
     }
 
     private void initializeAds() {
-        Utils.loadIntersitialAd(getActivity());
+        //Utils.loadIntersitialAd(getActivity());
         AdView adView = myView.findViewById(R.id.adView);
         Utils.loadBannerAd(adView);
     }

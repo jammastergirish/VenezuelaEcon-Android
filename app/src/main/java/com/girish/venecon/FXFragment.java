@@ -105,7 +105,7 @@ public class FXFragment extends Fragment {
     }
 
     private void initializeAds() {
-        Utils.loadIntersitialAd(getActivity());
+        Utils.loadIntersitialAd(getActivity()); // Don't want interstitial on every fragment, just FX
         AdView adView = myView.findViewById(R.id.adView);
         Utils.loadBannerAd(adView);
     }
