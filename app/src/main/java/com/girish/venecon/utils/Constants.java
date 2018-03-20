@@ -12,9 +12,6 @@ public class Constants {
     public static final String DICOM_VALUE = "DICOM";
     public static final String BLACK_MARKET_VALUE = "BLACK_MARKET";
     public static final long ERROR_DURATION = 3000;
-
-    //Ads
-    public static final String INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-7175811277195688/6615701473";
-    public static final String BANNER_AD_UNIT_ID = "ca-app-pub-7175811277195688/2193654707";
-    public static final String ADMOB_APP_ID = "ca-app-pub-7175811277195688~1778307767";
+    public static final String AD_UNIT_ID = "ca-app-pub-7175811277195688/6615701473"; // This is for the interstitial
+    public static final String ADMOB_APP_ID = "ca-app-pub-7175811277195688~1778307767"; // This is the app ID
 }
