@@ -5,3 +5,4 @@
     android:layout_height="wrap_content"
     ads:adSize="BANNER"
     ads:adUnitId="ca-app-pub-7175811277195688/2193654707" />
+<!--Rather than having this last variable hard-coded here, how do we call it from utils.Constants (where I've added it)?-->
