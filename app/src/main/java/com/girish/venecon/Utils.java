@@ -1,6 +1,5 @@
 package com.girish.venecon;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
@@ -269,7 +268,7 @@ public class Utils {
 
     public static void loadIntersitialAd(Context context){
         final InterstitialAd mInterstitialAd = new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId(Constants.AD_UNIT_ID);
+        mInterstitialAd.setAdUnitId(Constants.INTERSTITIAL_AD_UNIT_ID);
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         new Handler().postDelayed(new Runnable() {
