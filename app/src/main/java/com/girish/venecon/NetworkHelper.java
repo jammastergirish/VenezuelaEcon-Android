@@ -1,5 +1,7 @@
 package com.girish.venecon;
 
+import android.util.Log;
+
 import com.girish.venecon.api.ApiService;
 import com.girish.venecon.api.models.BitcoinData;
 import com.girish.venecon.api.models.CrudeProductionData;
@@ -12,13 +14,11 @@ import com.girish.venecon.api.models.ReserveData;
 import com.girish.venecon.api.models.UsOilData;
 import com.girish.venecon.utils.Constants;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkHelper {
 
+    public static final String TAG = "Firebase token";
     private final Retrofit retrofit;
 
     public NetworkHelper() {
@@ -106,6 +107,28 @@ public class NetworkHelper {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<UsOilData>> call = apiService.getUsOilData();
         processCall(call, onDataCallback);
+    }
+
+    public void saveDeviceToken(String refreshedToken) {
+        ApiService apiService = retrofit.create(ApiService.class);
+        String language = Locale.getDefault().getLanguage();
+        Call<Void> call = apiService.saveToken(refreshedToken, language);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "Token saved successfully.");
+                } else {
+                    Log.e(TAG, "Response is not successful. Message: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Failure called.");
+                t.printStackTrace();
+            }
+        });
     }
 
     // Since all the calls are processed exactly the same way,
