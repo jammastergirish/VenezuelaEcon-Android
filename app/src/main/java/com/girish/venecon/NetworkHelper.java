@@ -109,7 +109,7 @@ public class NetworkHelper {
         processCall(call, onDataCallback);
     }
 
-    public void saveDeviceToken(String refreshedToken) {
+    public void saveDeviceToken(final String refreshedToken) {
         ApiService apiService = retrofit.create(ApiService.class);
         String language = Locale.getDefault().getLanguage();
         Call<Void> call = apiService.saveToken(refreshedToken, language);
@@ -117,7 +117,7 @@ public class NetworkHelper {
             @Override
             public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Log.d(TAG, "Token saved successfully.");
+                    Log.d(TAG, "Token saved successfully: " + refreshedToken);
                 } else {
                     Log.e(TAG, "Response is not successful. Message: " + response.message());
                 }
