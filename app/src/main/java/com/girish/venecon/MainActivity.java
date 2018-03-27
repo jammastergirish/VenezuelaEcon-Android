@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         public void onServiceConnected(ComponentName name,
                                        IBinder service) {
             mService = IInAppBillingService.Stub.asInterface(service);
-            queryItems();
+//            queryItems();
         }
     };
 
@@ -85,6 +85,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    // I assume this needs to get called to check what was purchased, and to activate the ad free version if user already paid
+    // No way to test that at the moment
     private void queryItems() {
         ArrayList<String> skuList = new ArrayList<String>();
         skuList.add("ad_free");
@@ -100,19 +102,6 @@ public class MainActivity extends AppCompatActivity
                 // response list should contain the products you have bought
             }
         } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(),
-                    "ad_free", "subs", "bGoa+V7g/yqDXvKRqq+JTFn4uQZbPiQJo4pf9RzJ");
-            PendingIntent pendingIntent = buyIntentBundle.getParcelable("BUY_INTENT");
-            startIntentSenderForResult(pendingIntent.getIntentSender(),
-                    REQUEST_CODE, new Intent(), 0, 0,
-                    0);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (IntentSender.SendIntentException e) {
             e.printStackTrace();
         }
     }
@@ -215,10 +204,33 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.about) {
             changeToFragment(new AboutFragment(), mContext.getString(R.string.about));
         }
+        else if (id == R.id.adFree) {
+            // Need to return false cause we don't wanna show this item as selected
+            // Cause there's no screen to go to
+            buyAdFree();
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return false;
+        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void buyAdFree() {
+        try {
+            Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(),
+                    "ad_free", "subs", "bGoa+V7g/yqDXvKRqq+JTFn4uQZbPiQJo4pf9RzJ");
+            PendingIntent pendingIntent = buyIntentBundle.getParcelable("BUY_INTENT");
+            startIntentSenderForResult(pendingIntent.getIntentSender(),
+                    REQUEST_CODE, new Intent(), 0, 0,
+                    0);
+        } catch (RemoteException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (IntentSender.SendIntentException e) {
+            e.printStackTrace();
+        }
     }
 
     private void changeToFragment(Fragment fragment, String title)

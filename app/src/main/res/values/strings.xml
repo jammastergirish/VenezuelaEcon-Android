@@ -74,4 +74,5 @@
     <string name="version">Version %1s on Android</string>
     <string name="please_check_your_internet_connection">Please check your internet connection.</string>
     <string name="banner_ad_unit_id">ca-app-pub-7175811277195688/2193654707</string>
+    <string name="ad_free">Ad free</string>
 </resources>
