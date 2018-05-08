@@ -4,6 +4,7 @@ apply plugin: 'io.fabric' // https://firebase.google.com/docs/crashlytics/get-st
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.1'
+    flavorDimensions "default"
     defaultConfig {
         applicationId 'com.girish.venecon'
         minSdkVersion 16
@@ -19,6 +20,16 @@ android {
         }
     }
     productFlavors {
+        india {
+            applicationIdSuffix ".india"
+            buildConfigField "String", "API_URL", "http://india.com"
+            buildConfigField "String", "ANY_NAME_REALLY", "SOME VALUE WHATEVER"
+        }
+        venezuela {
+            applicationIdSuffix ".venezuela"
+            buildConfigField "String", "API_URL", "http://venezuela.com"
+            buildConfigField "String", "ANY_NAME_REALLY", "SOME OTHER VALUE"
+        }
     }
 }
 
